@@ -3,8 +3,8 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import markdownHtml from "zenn-markdown-html";
 
-import { useMarkdownEditor } from "@/features/press-release/new/hooks/useMarkdownEditor";
-import { Preview } from "@/features/press-release/new/components/preview";
+import { useMarkdownEditor } from "@/features/pressreleases/[pressreleaseId]/edit/hooks/useMarkdownEditor";
+import { Preview } from "@/features/pressreleases/[pressreleaseId]/edit/components/preview";
 
 export default function NewPressReleasePage() {
   const [doc, setDoc] = useState<string>("");
