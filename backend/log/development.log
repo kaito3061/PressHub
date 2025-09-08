@@ -315,3 +315,26 @@ puma (7.0.1) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
 puma (7.0.1) lib/puma/server.rb:497:in 'Puma::Server#process_client'
 puma (7.0.1) lib/puma/server.rb:266:in 'block in Puma::Server#run'
 puma (7.0.1) lib/puma/thread_pool.rb:172:in 'block in Puma::ThreadPool#spawn_thread'
+  [1m[35mSQL (0.4ms)[0m  [1m[35mSET search_path TO public /*application='PrtimesHakkason'*/[0m
+  [1m[35m (197.0ms)[0m  [1m[35mCREATE DATABASE "prtimes_hakkason_development" ENCODING = 'unicode' /*application='PrtimesHakkason'*/[0m
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='PrtimesHakkason'*/[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='PrtimesHakkason'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7260784604294177565) /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-09-08 07:26:09.337380', '2025-09-08 07:26:09.337383') RETURNING "key" /*application='PrtimesHakkason'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(7260784604294177565) /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+Started GET "/" for 127.0.0.1 at 2025-09-08 16:26:37 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/shibaokaito/.asdf/installs/ruby/3.4.5/lib/ruby/gems/3.4.0/gems/railties-8.0.2.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/shibaokaito/.asdf/installs/ruby/3.4.5/lib/ruby/gems/3.4.0/gems/railties-8.0.2.1/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.4ms | GC: 0.0ms)
+Completed 200 OK in 80ms (Views: 2.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7260784604294177565) /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='PrtimesHakkason'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7260784604294177565) /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
