@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :press_releases do
     # resources :revisions, only: [:index, :create]
-    # resources :uploads, only: [:create]
+    resources :uploads, only: [:create]
     resources :comments, only: [:create]
     # resources :ai_reviews, only: [:create]
     resources :review_scores, only: [:create]
