@@ -2,7 +2,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import markdownHtml from "zenn-markdown-html";
-import "zenn-content-css";
 
 import { useMarkdownEditor } from "@/features/press-release/new/hooks/useMarkdownEditor";
 import { Preview } from "@/features/press-release/new/components/preview";
@@ -11,10 +10,6 @@ export default function NewPressReleasePage() {
   const [doc, setDoc] = useState<string>("");
   const [html, setHtml] = useState<string>("");
   const [view, setView] = useState<"edit" | "preview" | "both">("edit");
-
-  useEffect(() => {
-    import("zenn-embed-elements");
-  }, []);
 
   const save = useCallback(() => {
     const html = markdownHtml(doc);
