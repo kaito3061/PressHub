@@ -10,11 +10,28 @@ export default function NewPressReleasePage() {
   const [doc, setDoc] = useState<string>("");
   const [html, setHtml] = useState<string>("");
   const [view, setView] = useState<"edit" | "preview" | "both">("edit");
+  const [canSave, setCanSave] = useState<boolean>(false);
 
-  const save = useCallback(() => {
+  const savePreview = useCallback(() => {
     const html = markdownHtml(doc);
     setHtml(html);
+    setCanSave(true);
   }, [doc]);
+
+  const saveArticle = () => {
+    try {
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/press-releases/new`, {
+        method: "POST",
+        body: JSON.stringify({
+          doc,
+        }),
+      });
+      setCanSave(false);
+    } catch (err) {
+      console.error(err);
+      setCanSave(false);
+    }
+  };
 
   // 入力の最終操作から0.5秒後に自動保存
   const debouncedAutoSave = useDebouncedCallback(() => {
@@ -32,13 +49,17 @@ export default function NewPressReleasePage() {
   const { editor } = useMarkdownEditor({
     doc,
     setDoc,
-    save,
+    savePreview,
   });
 
   return (
     <div className="flex flex-col h-screen mx-[15vw] my-[5vh]">
       <div className="pt-4 flex justify-end">
-        <button onClick={save} className="rounded bg-blue-500 px-4 py-2 text-white">
+        <button
+          onClick={saveArticle}
+          className={`rounded bg-blue-500 px-4 py-2 text-white ${!canSave ? "opacity-50" : ""}`}
+          disabled={!canSave}
+        >
           保存
         </button>
       </div>

@@ -7,7 +7,7 @@ import { tags } from "@lezer/highlight";
 import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
 import { EditorSetup } from "../types/editorSetup";
 
-export const useMarkdownEditor = ({ doc, setDoc, save }: EditorSetup) => {
+export const useMarkdownEditor = ({ doc, setDoc, savePreview }: EditorSetup) => {
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [editorView, setEditorView] = useState<EditorView | null>(null);
   // Reactのcallback refで常に最新のDOMノードを受け取る
@@ -22,12 +22,12 @@ export const useMarkdownEditor = ({ doc, setDoc, save }: EditorSetup) => {
         // 本文の保存
         key: "Mod-s",
         run() {
-          save();
+          savePreview();
           return true;
         },
       },
     ]);
-  }, [save]);
+  }, [savePreview]);
 
   // editorのrefはcallbackでcontainerに反映するため副作用は不要
 
