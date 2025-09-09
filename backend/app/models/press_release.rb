@@ -8,7 +8,6 @@ class PressRelease < ApplicationRecord
   has_many :uploads, dependent: :destroy
   has_many :comments, dependent: :destroy
 
-  # タイトルと本文は必須
-  validates :title, presence: true
-  validates :content, presence: true
+  # validates :title, presence: true
+  # validates :content, presence: true
 end
