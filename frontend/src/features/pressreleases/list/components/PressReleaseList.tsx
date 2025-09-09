@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { PressReleaseType } from "../../shared/types/PressRelease";
+import CreateNewPressRelease from "./CreateNewPressRelease";
 import PressRelease from "./PressRelease";
 
 interface PressReleaseListProps {
@@ -31,6 +32,7 @@ export default function PressReleaseList({ pressReleases }: PressReleaseListProp
 
   return (
     <div className="space-y-6">
+      <CreateNewPressRelease />
       {currentPageData.length === 0 ? (
         <>
           <p className="text-center text-gray-500">
