@@ -1,6 +1,10 @@
 import { baseUrl } from "../const/baseUrl";
 import { PressReleaseType } from "../types/PressRelease";
 
+/**
+ * @description 新しいPressReleaseを作成
+ * @returns {Promise<PressReleaseType | undefined>} 作成したPressReleaseの情報、失敗した場合はundefined
+ */
 export default async function createPressRelease(): Promise<PressReleaseType | undefined> {
   try {
     console.log(baseUrl);
