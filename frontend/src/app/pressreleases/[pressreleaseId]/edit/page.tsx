@@ -65,7 +65,7 @@ export default function PressReleaseEditPage() {
             <Preview html={html} />
           )}
         </div>
-        <RightSidebar isEdit={isEdit} onToggle={setIsEdit} />
+        <RightSidebar doc={article.doc} isEdit={isEdit} onToggle={setIsEdit} />
       </div>
     </div>
   );
