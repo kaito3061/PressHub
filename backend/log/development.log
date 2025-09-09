@@ -2393,3 +2393,359 @@ Processing by PressReleasesController#index as */*
 Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
 
 
+Started GET "/press_releases/" for ::1 at 2025-09-09 18:51:00 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (17.5ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 39ms (Views: -6.8ms | ActiveRecord: 25.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 18:51:07 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.9ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 18:51:38 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.5ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 18:51:39 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.2ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 5ms (Views: 2.3ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 18:51:47 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.3ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/press_releases" for ::1 at 2025-09-09 18:51:56 +0900
+Processing by PressReleasesController#create as */*
+  Parameters: {"press_release" => {"title" => "テストタイトル", "content" => "本文ffjdksahfsahfjkashdfhsadfhosajdfoiasjdfopsajdpfojspoadfjpsdafjspdjfospjfosadfojsodfjsoapdfjosjdfoijsdiofjsioadfjhiosadhfiosdhfiosdhfoijsdifjsaidfjiosdjfoisdjfoasjdfoisajdfoisajdofijsaodfjoisdjfosdjfoisjdoifjasodfjodjsofjsoiadjfoiajsdfojsadfijasodfjasfdjoisdjfosdaj"}}
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1 /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:21:in 'PressReleasesController#create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+  [1m[36mPressRelease Create (6.4ms)[0m  [1m[32mINSERT INTO "press_releases" ("title", "content", "created_at", "updated_at", "user_id") VALUES ('テストタイトル', '本文ffjdksahfsahfjkashdfhsadfhosajdfoiasjdfopsajdpfojspoadfjpsdafjspdjfospjfosadfojsodfjsoapdfjosjdfoijsdiofjsioadfjhiosadhfiosdhfiosdhfoijsdifjsaidfjiosdjfoisdjfoasjdfoisajdfoisajdofijsaodfjoisdjfosdjfoisjdoifjasodfjodjsofjsoiadjfoiajsdfojsadfijasodfjasfdjoisdjfosdaj', '2025-09-09 09:51:56.102156', '2025-09-09 09:51:56.102156', NULL) RETURNING "id" /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+Completed 500 Internal Server Error in 94ms (ActiveRecord: 24.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::NotNullViolation (PG::NotNullViolation: ERROR:  null value in column "user_id" of relation "press_releases" violates not-null constraint
+DETAIL:  Failing row contains (1, テストタイトル, 本文ffjdksahfsahfjkashdfhsadfhosajdfoiasjdfopsajdpfojspoadfjps..., 2025-09-09 09:51:56.102156, 2025-09-09 09:51:56.102156, null).
+)
+Caused by: PG::NotNullViolation (ERROR:  null value in column "user_id" of relation "press_releases" violates not-null constraint
+DETAIL:  Failing row contains (1, テストタイトル, 本文ffjdksahfsahfjkashdfhsadfhosajdfoiasjdfopsajdpfojspoadfjps..., 2025-09-09 09:51:56.102156, 2025-09-09 09:51:56.102156, null).
+)
+
+Information for: ActiveRecord::NotNullViolation (PG::NotNullViolation: ERROR:  null value in column "user_id" of relation "press_releases" violates not-null constraint
+DETAIL:  Failing row contains (1, テストタイトル, 本文ffjdksahfsahfjkashdfhsadfhosajdfoiasjdfopsajdpfojspoadfjps..., 2025-09-09 09:51:56.102156, 2025-09-09 09:51:56.102156, null).
+):
+  
+
+Information for cause: PG::NotNullViolation (ERROR:  null value in column "user_id" of relation "press_releases" violates not-null constraint
+DETAIL:  Failing row contains (1, テストタイトル, 本文ffjdksahfsahfjkashdfhsadfhosajdfoiasjdfopsajdpfojspoadfjps..., 2025-09-09 09:51:56.102156, 2025-09-09 09:51:56.102156, null).
+):
+  
+app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+Started POST "/users" for ::1 at 2025-09-09 18:52:16 +0900
+Processing by UsersController#create as */*
+  Parameters: {"user" => {"name" => "テストユーザー", "email" => "[FILTERED]"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='create',application='PrtimesHakkason',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:6:in 'UsersController#create'
+  [1m[36mUser Create (2.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "created_at", "updated_at") VALUES ('テストユーザー', 'test@example.com', '2025-09-09 09:52:16.397501', '2025-09-09 09:52:16.397501') RETURNING "id" /*action='create',application='PrtimesHakkason',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:6:in 'UsersController#create'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*action='create',application='PrtimesHakkason',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:6:in 'UsersController#create'
+Completed 201 Created in 27ms (Views: 1.2ms | ActiveRecord: 3.5ms (1 query, 0 cached) | GC: 0.3ms)
+
+
+Started POST "/press_releases" for ::1 at 2025-09-09 18:52:18 +0900
+Processing by PressReleasesController#create as */*
+  Parameters: {"press_release" => {"title" => "テストタイトル", "content" => "本文ffjdksahfsahfjkashdfhsadfhosajdfoiasjdfopsajdpfojspoadfjpsdafjspdjfospjfosadfojsodfjsoapdfjosjdfoijsdiofjsioadfjhiosadhfiosdhfiosdhfoijsdifjsaidfjiosdjfoisdjfoasjdfoisajdfoisajdofijsaodfjoisdjfosdjfoisjdoifjasodfjodjsofjsoiadjfoiajsdfojsadfijasodfjasfdjoisdjfosdaj"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1 /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:21:in 'PressReleasesController#create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+  [1m[36mPressRelease Create (3.7ms)[0m  [1m[32mINSERT INTO "press_releases" ("title", "content", "created_at", "updated_at", "user_id") VALUES ('テストタイトル', '本文ffjdksahfsahfjkashdfhsadfhosajdfoiasjdfopsajdpfojspoadfjpsdafjspdjfospjfosadfojsodfjsoapdfjosjdfoijsdiofjsioadfjhiosadhfiosdhfiosdhfoijsdifjsaidfjiosdjfoisdjfoasjdfoisajdfoisajdofijsaodfjoisdjfosdjfoisjdoifjasodfjodjsofjsoiadjfoiajsdfojsadfijasodfjasfdjoisdjfosdaj', '2025-09-09 09:52:18.359796', '2025-09-09 09:52:18.359796', 1) RETURNING "id" /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+Completed 201 Created in 27ms (Views: 0.6ms | ActiveRecord: 4.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 18:52:20 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.3ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 7ms (Views: 6.1ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 18:52:28 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.4ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 10ms (Views: 9.2ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 18:54:14 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (1.2ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 9ms (Views: 6.7ms | ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 18:54:48 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.4ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 4ms (Views: 3.8ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:01:24 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (22.0ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 37ms (Views: -0.5ms | ActiveRecord: 30.2ms (1 query, 0 cached) | GC: 1.7ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:01:26 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.5ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:02:02 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.4ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 2ms (Views: 1.8ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:02:04 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.4ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:02:34 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.4ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:02:47 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.3ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:03:28 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.3ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 2ms (Views: 2.0ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:05:47 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.8ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:09:54 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.8ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 26ms (Views: 23.4ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 19.8ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:13:02 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.4ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:14:06 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.3ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:17:49 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (2.5ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 11ms (Views: 6.6ms | ActiveRecord: 2.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:17:59 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.3ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 1ms (Views: 0.8ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:18:26 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.4ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 1ms (Views: 1.0ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:19:08 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.4ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 1.4ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:28:09 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (22.1ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 29ms (Views: -9.0ms | ActiveRecord: 34.3ms (1 query, 0 cached) | GC: 0.9ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:34:41 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (27.7ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 30ms (Views: -9.8ms | ActiveRecord: 39.7ms (1 query, 0 cached) | GC: 0.6ms)
+
+
+Started GET "/" for ::1 at 2025-09-09 19:35:11 +0900
+Processing by PressReleasesController#index as HTML
+  [1m[36mPressRelease Load (0.8ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 12ms (Views: 8.7ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/_static/out/browser/serviceWorker.js" for ::1 at 2025-09-09 19:35:13 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/_static/out/browser/serviceWorker.js"):
+  
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:36:05 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (17.4ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 69ms (Views: 6.0ms | ActiveRecord: 43.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/press_releases/" for ::1 at 2025-09-09 19:36:09 +0900
+Processing by PressReleasesController#create as */*
+  Parameters: {"title" => "", "press_release" => {"title" => ""}}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1 /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:21:in 'PressReleasesController#create'
+Completed 422 Unprocessable Content in 59ms (Views: 0.1ms | ActiveRecord: 6.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:36:22 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.4ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 10ms (Views: 9.3ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:36:22 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.3ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/press_releases/" for ::1 at 2025-09-09 19:36:24 +0900
+Processing by PressReleasesController#create as */*
+  Parameters: {"title" => "", "press_release" => {"title" => ""}}
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1 /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:21:in 'PressReleasesController#create'
+Completed 422 Unprocessable Content in 29ms (Views: 1.8ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/press_releases/" for ::1 at 2025-09-09 19:36:29 +0900
+Processing by PressReleasesController#create as */*
+  Parameters: {"title" => "", "press_release" => {"title" => ""}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1 /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:21:in 'PressReleasesController#create'
+Completed 422 Unprocessable Content in 10ms (Views: 0.2ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:36:44 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.6ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 15ms (Views: 13.7ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/press_releases/" for ::1 at 2025-09-09 19:36:49 +0900
+Processing by PressReleasesController#create as */*
+  Parameters: {"title" => "", "press_release" => {"title" => ""}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1 /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:21:in 'PressReleasesController#create'
+Completed 422 Unprocessable Content in 14ms (Views: 0.3ms | ActiveRecord: 1.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:37:16 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (7.6ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 12ms (Views: 3.8ms | ActiveRecord: 7.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/press_releases/" for ::1 at 2025-09-09 19:37:20 +0900
+Processing by PressReleasesController#create as */*
+  Parameters: {"title" => "test", "press_release" => {"title" => "test"}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1 /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:21:in 'PressReleasesController#create'
+Completed 422 Unprocessable Content in 9ms (Views: 0.4ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:37:32 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (1.0ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 10ms (Views: 8.6ms | ActiveRecord: 1.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/press_releases/" for ::1 at 2025-09-09 19:37:34 +0900
+Processing by PressReleasesController#create as */*
+  Parameters: {"title" => "test", "content" => "test", "press_release" => {"title" => "test", "content" => "test"}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1 /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:21:in 'PressReleasesController#create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+  [1m[36mPressRelease Create (6.1ms)[0m  [1m[32mINSERT INTO "press_releases" ("title", "content", "created_at", "updated_at", "user_id") VALUES ('test', 'test', '2025-09-09 10:37:34.359532', '2025-09-09 10:37:34.359532', 1) RETURNING "id" /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+Completed 201 Created in 58ms (Views: 1.7ms | ActiveRecord: 7.6ms (2 queries, 0 cached) | GC: 20.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 19:37:34 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.2ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
