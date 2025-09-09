@@ -42,6 +42,6 @@ class PressReleasesController < ApplicationController
   end
 
   def press_release_params
-  params.require(:press_release).permit(:title, :body, :content)
+  params.fetch(:press_release, {}).permit(:title, :content )
   end
 end
