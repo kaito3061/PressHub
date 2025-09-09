@@ -343,3 +343,97 @@ Completed 200 OK in 80ms (Views: 2.5ms | ActiveRecord: 0.0ms (0 queries, 0 cache
   [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='PrtimesHakkason'*/[0m
   [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(7260784604294177565) /*application='PrtimesHakkason'*/[0m
   [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+Started GET "/" for 127.0.0.1 at 2025-09-08 18:56:37 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+Processing by PressReleasesController#index as HTML
+  [1m[36mPressRelease Load (14.6ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:7:in 'PressReleasesController#index'
+Completed 500 Internal Server Error in 34ms (ActiveRecord: 19.8ms (1 query, 0 cached) | GC: 1.7ms)
+
+
+  
+ActiveRecord::StatementInvalid (PG::UndefinedTable: ERROR:  relation "press_releases" does not exist
+LINE 1: SELECT "press_releases".* FROM "press_releases" /*action='in...
+                                       ^
+)
+Caused by: PG::UndefinedTable (ERROR:  relation "press_releases" does not exist
+LINE 1: SELECT "press_releases".* FROM "press_releases" /*action='in...
+                                       ^
+)
+
+Information for: ActiveRecord::StatementInvalid (PG::UndefinedTable: ERROR:  relation "press_releases" does not exist
+LINE 1: SELECT "press_releases".* FROM "press_releases" /*action='in...
+                                       ^
+):
+  
+
+Information for cause: PG::UndefinedTable (ERROR:  relation "press_releases" does not exist
+LINE 1: SELECT "press_releases".* FROM "press_releases" /*action='in...
+                                       ^
+):
+  
+app/controllers/press_releases_controller.rb:7:in 'PressReleasesController#index'
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='PrtimesHakkason'*/[0m
+  [1m[35m (19.0ms)[0m  [1m[35mCREATE DATABASE "prtimes_hakkason_development" ENCODING = 'unicode' /*application='PrtimesHakkason'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='PrtimesHakkason'*/[0m
+  [1m[35m (113.2ms)[0m  [1m[35mCREATE DATABASE "prtimes_hakkason_test" ENCODING = 'unicode' /*application='PrtimesHakkason'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7260784604294177565) /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (4.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='PrtimesHakkason'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7260784604294177565) /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7260784604294177565) /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='PrtimesHakkason'*/[0m
+Migrating to CreatePressReleases (20250908100129)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='PrtimesHakkason'*/[0m
+  [1m[35m (12.3ms)[0m  [1m[35mCREATE TABLE "press_releases" ("id" bigserial primary key, "title" character varying, "content" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250908100129') RETURNING "version" /*application='PrtimesHakkason'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='PrtimesHakkason'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(7260784604294177565) /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7260784604294177565) /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='PrtimesHakkason'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(7260784604294177565) /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+Started GET "/" for 127.0.0.1 at 2025-09-08 19:05:52 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+Processing by PressReleasesController#index as HTML
+  [1m[36mPressRelease Load (14.4ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:7:in 'PressReleasesController#index'
+Completed 200 OK in 32ms (Views: 0.1ms | ActiveRecord: 20.3ms (1 query, 0 cached) | GC: 1.8ms)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2025-09-08 19:05:52 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2025-09-08 19:05:58 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/press_releases" for ::1 at 2025-09-08 19:14:38 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+Processing by PressReleasesController#index as HTML
+  [1m[36mPressRelease Load (9.8ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:7:in 'PressReleasesController#index'
+Completed 200 OK in 29ms (Views: 0.1ms | ActiveRecord: 14.7ms (1 query, 0 cached) | GC: 1.6ms)
+
+
+Started GET "/favicon.ico" for ::1 at 2025-09-08 19:14:39 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/" for 127.0.0.1 at 2025-09-08 19:19:10 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+Processing by PressReleasesController#index as HTML
+  [1m[36mPressRelease Load (43.0ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:7:in 'PressReleasesController#index'
+Completed 200 OK in 66ms (Views: 0.2ms | ActiveRecord: 46.8ms (1 query, 0 cached) | GC: 2.1ms)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2025-09-08 19:19:10 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
