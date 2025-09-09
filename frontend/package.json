@@ -11,9 +11,17 @@
     "format:check": "prettier --check \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
+    "@codemirror/commands": "^6.8.1",
+    "@codemirror/lang-markdown": "^6.3.4",
+    "@codemirror/state": "^6.5.2",
+    "@codemirror/view": "^6.38.2",
     "next": "15.5.2",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "use-debounce": "^10.0.6",
+    "zenn-content-css": "^0.2.3",
+    "zenn-embed-elements": "^0.2.3",
+    "zenn-markdown-html": "^0.2.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
