@@ -4,7 +4,9 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @press_release.comments.new(comment_params)
-    @comment.user = current_user
+    # current_user が存在すれば紐付け、いなければゲストコメントとして作成
+    @comment.user = current_user if current_user.present?
+
     if @comment.save
       render json: @comment, status: :created
     else
@@ -20,9 +22,5 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:content)
-  end
-
-  def press_release_params
-    params.require(:press_release).permit(:title, :body)
   end
 end
