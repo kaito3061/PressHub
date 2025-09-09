@@ -18,7 +18,7 @@ export default function PressRelease({ pressRelease }: PressReleaseProps) {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/pressreleases/${pressRelease.id}`);
+    router.push(`/pressreleases/${pressRelease.id}/edit`);
   };
 
   return (
