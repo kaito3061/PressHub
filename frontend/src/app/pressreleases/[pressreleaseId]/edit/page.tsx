@@ -5,37 +5,29 @@ import markdownHtml from "zenn-markdown-html";
 
 import { useMarkdownEditor } from "@/features/pressreleases/edit/hooks/useMarkdownEditor";
 import { Preview } from "@/features/pressreleases/edit/components/preview";
+import Header from "@/features/pressreleases/edit/components/header";
+import LeftSidebar from "@/features/pressreleases/edit/components/leftSidebar";
+import RightSidebar from "@/features/pressreleases/edit/components/rightSidebar";
 
 export default function PressReleaseEditPage() {
-  const [doc, setDoc] = useState<string>("");
   const [html, setHtml] = useState<string>("");
-  const [view, setView] = useState<"edit" | "preview" | "both">("edit");
+  const [isEdit, setIsEdit] = useState<boolean>(true);
   const [canSave, setCanSave] = useState<boolean>(false);
-
+  const [article, setArticle] = useState({
+    title: "",
+    subtitle: "",
+    doc: "",
+  });
   const savePreview = useCallback(() => {
-    const html = markdownHtml(doc);
+    const html = markdownHtml(article.title + "\n" + article.doc);
     setHtml(html);
     setCanSave(true);
-  }, [doc]);
-
-  const saveArticle = () => {
-    try {
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/press-releases/new`, {
-        method: "POST",
-        body: JSON.stringify({
-          doc,
-        }),
-      });
-      setCanSave(false);
-    } catch (err) {
-      console.error(err);
-      setCanSave(false);
-    }
-  };
+    console.log(article.title + "\n" + article.doc);
+  }, [article.doc, article.title]);
 
   // 入力の最終操作から0.5秒後に自動保存
   const debouncedAutoSave = useDebouncedCallback(() => {
-    const html = markdownHtml(doc);
+    const html = markdownHtml(article.title + "\n" + article.doc);
     setHtml(html);
   }, 0.5);
 
@@ -44,77 +36,37 @@ export default function PressReleaseEditPage() {
     return () => {
       debouncedAutoSave.cancel();
     };
-  }, [doc, debouncedAutoSave]);
+  }, [article.doc, debouncedAutoSave]);
 
-  const { editor } = useMarkdownEditor({
-    doc,
-    setDoc,
+  const { editor, navigateToLine } = useMarkdownEditor({
+    doc: article.doc,
+    setDoc: (doc) => setArticle({ ...article, doc }),
     savePreview,
   });
 
   return (
-    <div className="flex flex-col h-screen mx-[15vw] my-[5vh]">
-      <div className="pt-4 flex justify-end">
-        <button
-          onClick={saveArticle}
-          className={`rounded bg-blue-500 px-4 py-2 text-white ${!canSave ? "opacity-50" : ""}`}
-          disabled={!canSave}
-        >
-          保存
-        </button>
-      </div>
-      {/* 表示モードの切替 */}
-      <div className="flex justify-end">
-        <div className="cursor-pointer rounded-md p-2 flex gap-5">
-          <button
-            onClick={() => setView("edit")}
-            className={
-              view === "edit" ? "bg-gray-500 text-white px-4 py-2" : "bg-gray-200 px-4 py-2"
-            }
-          >
-            編集
-          </button>
-          <button
-            onClick={() => setView("preview")}
-            className={
-              view === "preview" ? "bg-gray-500 text-white px-4 py-2" : "bg-gray-200 px-4 py-2"
-            }
-          >
-            プレビュー
-          </button>
-          <button
-            onClick={() => setView("both")}
-            className={
-              view === "both" ? "bg-gray-500 text-white px-4 py-2" : "bg-gray-200 px-4 py-2"
-            }
-          >
-            両方
-          </button>
-        </div>
-      </div>
-
-      {view === "edit" && (
-        <div className="flex h-full">
-          <div ref={editor} className="h-full w-full border"></div>
-        </div>
-      )}
-
-      {view === "preview" && (
-        <div className="flex h-full">
-          <div className="h-full w-full border">
+    <div className="flex flex-col h-screen">
+      <Header canSave={canSave} doc={article.doc} />
+      <div className="flex h-full flex-1">
+        <LeftSidebar doc={article.doc} onJump={(line) => navigateToLine(line)} />
+        {/* メインコンテンツエリア */}
+        <div className="h-full w-full">
+          {isEdit ? (
+            <div className="ml-8 mt-10">
+              <input
+                className="w-full text-4xl font-bold tracking-wider focus:outline-none"
+                placeholder="リリースタイトルを入力"
+                value={article.title}
+                onChange={(e) => setArticle({ ...article, title: e.target.value })}
+              />
+              <div ref={editor} className="mt-10" />
+            </div>
+          ) : (
             <Preview html={html} />
-          </div>
+          )}
         </div>
-      )}
-
-      {view === "both" && (
-        <div className="flex h-full">
-          <div ref={editor} className="h-full w-1/2 border"></div>
-          <div className="h-full w-1/2 border">
-            <Preview html={html} />
-          </div>
-        </div>
-      )}
+        <RightSidebar isEdit={isEdit} onToggle={setIsEdit} />
+      </div>
     </div>
   );
 }
