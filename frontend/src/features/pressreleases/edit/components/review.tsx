@@ -17,9 +17,63 @@ import {
   AccordionTrigger,
 } from "@/features/shadcn/components/ui/accordion";
 import { ScrollArea } from "@/features/shadcn/components/ui/scroll-area";
-import { aiReviewSections, internalComments } from "@/features/pressreleases/edit/config/review";
+import { internalComments } from "@/features/pressreleases/edit/config/review";
+import { useSpellCheckContext } from "../context/spellCheckContext";
 
 const Review = () => {
+  const { state } = useSpellCheckContext();
+  const latestSpellCheckResult = state.latestResult;
+  const originalText = state.originalText;
+
+  console.log("Review - 現在の校正結果:", latestSpellCheckResult);
+  console.log("Review - 状態:", state);
+
+  // 各行の文字範囲を取得する関数
+  const getLineRanges = (text: string) => {
+    const lines = text.split("\n");
+    const ranges: { start: number; end: number; lineNumber: number }[] = [];
+    let currentIndex = 0;
+
+    lines.forEach((line, index) => {
+      const start = currentIndex;
+      const end = currentIndex + line.length;
+      ranges.push({
+        start,
+        end,
+        lineNumber: index + 1,
+      });
+      currentIndex = end + 1;
+    });
+
+    return ranges;
+  };
+
+  // 文字インデックスから正確な行番号を取得する関数
+  const getAccurateLineNumber = (text: string, charIndex: number): number => {
+    const lineRanges = getLineRanges(text);
+    const range = lineRanges.find((r) => charIndex >= r.start && charIndex <= r.end);
+    return range ? range.lineNumber : 1;
+  };
+
+  // 校正結果をカテゴリ別に分類
+  const categorizeSpellCheckResults = (result: NonNullable<typeof latestSpellCheckResult>) => {
+    const messages = result.messages || [];
+    const categories = {
+      typo: messages.filter((msg) => msg.ruleId === "typo"),
+      grammar: messages.filter((msg) => msg.ruleId === "grammar"),
+    };
+    return categories;
+  };
+
+  const spellCheckCategories = latestSpellCheckResult
+    ? categorizeSpellCheckResults(latestSpellCheckResult)
+    : { typo: [], grammar: [] };
+
+  const totalSpellCheckCount = Object.values(spellCheckCategories).reduce(
+    (sum, items) => sum + items.length,
+    0
+  );
+
   return (
     <div>
       <Sheet>
@@ -43,7 +97,7 @@ const Review = () => {
                 <TabsTrigger value="checklist" className="flex items-center gap-2">
                   AIレビュー
                   <Badge variant="secondary" className="ml-1">
-                    3
+                    {totalSpellCheckCount}
                   </Badge>
                 </TabsTrigger>
                 <TabsTrigger value="comments" className="flex items-center gap-2">
@@ -57,36 +111,97 @@ const Review = () => {
               <TabsContent value="checklist" className="mt-4">
                 <ScrollArea className="h-[70vh] pr-3">
                   <div className="space-y-4">
-                    <Accordion type="multiple">
-                      {aiReviewSections.map((section) => (
-                        <AccordionItem key={section.value} value={section.value}>
-                          <AccordionTrigger className="flex items-center justify-between w-full">
-                            <div className="flex items-center gap-2">
-                              <span>{section.label}</span>
-                            </div>
-                            <Badge variant="destructive">{section.count}</Badge>
-                          </AccordionTrigger>
-                          <AccordionContent>
-                            <div className="mt-2 space-y-3">
-                              {section.items.map((i, idx) => (
-                                <div
-                                  key={idx}
-                                  className="rounded-md border border-red-200 bg-red-50 p-3"
-                                >
-                                  <div className="flex items-center gap-2 text-sm text-red-700">
-                                    <span className="inline-flex items-center gap-1">
-                                      行{i.line}:
-                                    </span>
-                                    <span className="font-medium">{i.text}</span>
-                                  </div>
-                                  <p className="mt-1 text-sm text-red-600">提案: {i.suggest}</p>
-                                </div>
-                              ))}
-                            </div>
-                          </AccordionContent>
-                        </AccordionItem>
-                      ))}
-                    </Accordion>
+                    {totalSpellCheckCount > 0 ? (
+                      <Accordion type="multiple">
+                        {/* 誤字脱字 */}
+                        {spellCheckCategories.typo.length > 0 && (
+                          <AccordionItem value="typo">
+                            <AccordionTrigger className="flex items-center justify-between w-full">
+                              <div className="flex items-center gap-2">
+                                <span>誤字脱字</span>
+                              </div>
+                              <Badge variant="destructive">
+                                {spellCheckCategories.typo.length}
+                              </Badge>
+                            </AccordionTrigger>
+                            <AccordionContent>
+                              <div className="mt-2 space-y-3">
+                                {spellCheckCategories.typo.map((item, idx) => {
+                                  const lineNumber = getAccurateLineNumber(
+                                    originalText || "",
+                                    item.range[0]
+                                  );
+                                  return (
+                                    <div
+                                      key={idx}
+                                      className="rounded-md border border-red-200 bg-red-50 p-3"
+                                    >
+                                      <div className="flex items-center gap-2 text-sm text-red-700">
+                                        <span className="font-medium">{item.message}</span>
+                                      </div>
+                                      {item.fix && (
+                                        <p className="mt-1 text-sm text-red-600">
+                                          修正案: {item.fix.text}
+                                        </p>
+                                      )}
+                                      <p className="mt-1 text-xs text-red-500">
+                                        行数: {lineNumber}行目
+                                      </p>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </AccordionContent>
+                          </AccordionItem>
+                        )}
+
+                        {/* 文法エラー */}
+                        {spellCheckCategories.grammar.length > 0 && (
+                          <AccordionItem value="grammar">
+                            <AccordionTrigger className="flex items-center justify-between w-full">
+                              <div className="flex items-center gap-2">
+                                <span>文法エラー</span>
+                              </div>
+                              <Badge variant="destructive">
+                                {spellCheckCategories.grammar.length}
+                              </Badge>
+                            </AccordionTrigger>
+                            <AccordionContent>
+                              <div className="mt-2 space-y-3">
+                                {spellCheckCategories.grammar.map((item, idx) => {
+                                  const lineNumber = getAccurateLineNumber(
+                                    originalText || "",
+                                    item.range[0]
+                                  );
+                                  return (
+                                    <div
+                                      key={idx}
+                                      className="rounded-md border border-orange-200 bg-orange-50 p-3"
+                                    >
+                                      <div className="flex items-center gap-2 text-sm text-orange-700">
+                                        <span className="font-medium">{item.message}</span>
+                                      </div>
+                                      {item.fix && (
+                                        <p className="mt-1 text-sm text-orange-600">
+                                          修正案: {item.fix.text}
+                                        </p>
+                                      )}
+                                      <p className="mt-1 text-xs text-orange-500">
+                                        行数: {lineNumber}行目
+                                      </p>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </AccordionContent>
+                          </AccordionItem>
+                        )}
+                      </Accordion>
+                    ) : (
+                      <div className="text-center text-gray-500 py-8">
+                        校正結果がありません。まず校正を実行してください。
+                      </div>
+                    )}
                   </div>
                 </ScrollArea>
               </TabsContent>
