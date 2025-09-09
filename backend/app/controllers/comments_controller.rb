@@ -5,11 +5,9 @@ class CommentsController < ApplicationController
   def create
     # 選ばれたプレスリリースに、紐づいたコメントを新しく作る
     @comment = @press_release.comments.new(comment_params)
+    # current_user が存在すれば紐付け、いなければゲストコメントとして作成
+    @comment.user = current_user if current_user.present?
 
-    # コメントを書いたユーザーをセット（ログインしている人を current_user で取ってくる想定）
-    @comment.user = current_user
-
-    # 保存に成功したらそのコメントを返す。失敗したらエラーを返す
     if @comment.save
       render json: @comment, status: :created
     else
