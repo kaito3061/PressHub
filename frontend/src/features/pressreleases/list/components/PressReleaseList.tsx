@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/features/shadcn/components/ui/button";
 import {
   Pagination,
   PaginationContent,
@@ -8,6 +9,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/features/shadcn/components/ui/pagination";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { PressReleaseType } from "../../shared/types/PressRelease";
 import PressRelease from "./PressRelease";
@@ -29,39 +31,54 @@ export default function PressReleaseList({ pressReleases }: PressReleaseListProp
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {currentPageData.map((pressRelease) => (
-          <PressRelease pressRelease={pressRelease} key={pressRelease.id} />
-        ))}
-      </div>
+      {currentPageData.length === 0 ? (
+        <>
+          <p className="text-center text-gray-500">
+            まだプレスリリースは存在しないか、ページが見つかりません。
+          </p>
+          <div className="flex justify-center mt-4">
+            <Button asChild>
+              <Link href="/pressreleases">プレスリリース一覧へ戻る</Link>
+            </Button>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {currentPageData.map((pressRelease) => (
+              <PressRelease pressRelease={pressRelease} key={pressRelease.id} />
+            ))}
+          </div>
 
-      {totalPages > 1 && (
-        <Pagination>
-          <PaginationContent>
-            {page > 1 && (
-              <PaginationItem>
-                <PaginationPrevious href={`?page=${page - 1}`} />
-              </PaginationItem>
-            )}
+          {totalPages > 1 && (
+            <Pagination>
+              <PaginationContent>
+                {page > 1 && (
+                  <PaginationItem>
+                    <PaginationPrevious href={`?page=${page - 1}`} />
+                  </PaginationItem>
+                )}
 
-            {[...Array(totalPages)].map((_, i) => {
-              const pageNumber = i + 1;
-              return (
-                <PaginationItem key={pageNumber}>
-                  <PaginationLink href={`?page=${pageNumber}`} isActive={pageNumber === page}>
-                    {pageNumber}
-                  </PaginationLink>
-                </PaginationItem>
-              );
-            })}
+                {[...Array(totalPages)].map((_, i) => {
+                  const pageNumber = i + 1;
+                  return (
+                    <PaginationItem key={pageNumber}>
+                      <PaginationLink href={`?page=${pageNumber}`} isActive={pageNumber === page}>
+                        {pageNumber}
+                      </PaginationLink>
+                    </PaginationItem>
+                  );
+                })}
 
-            {page < totalPages && (
-              <PaginationItem>
-                <PaginationNext href={`?page=${page + 1}`} />
-              </PaginationItem>
-            )}
-          </PaginationContent>
-        </Pagination>
+                {page < totalPages && (
+                  <PaginationItem>
+                    <PaginationNext href={`?page=${page + 1}`} />
+                  </PaginationItem>
+                )}
+              </PaginationContent>
+            </Pagination>
+          )}
+        </>
       )}
     </div>
   );
