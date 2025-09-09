@@ -27,7 +27,7 @@ const Header = ({ canSave: canSaveProps, doc }: { canSave: boolean; doc: string 
         <Link href="/" className="text-xl">
           <FaArrowLeft />
         </Link>
-        <p className="text-xl font-bold">記事一覧へ</p>
+        <p className="text-xl font-bold">掲載物一覧へ</p>
       </div>
       <div className="flex items-center justify-center gap-4">
         <Button variant="outline">
