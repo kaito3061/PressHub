@@ -8,9 +8,9 @@
  */
 export type PressReleaseType = {
   id: number;
-  title: string;
-  content: string;
+  title?: string;
+  content?: string;
   created_at: string;
   updated_at: string;
-  userId: number;
+  userId?: number;
 };
