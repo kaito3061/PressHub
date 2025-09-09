@@ -7,7 +7,7 @@ interface promptLoaderProps {
 
 /**
  * @description 任意のopenAiのpromptデータを取得する機能
- * @param {string} promptの内容が書いてあるFileName
+ * @param {fileName} promptの内容が書いてあるFileName
  * @returns {string|undefined} ファイルの中身
  * @returns {undefined} エラーが発生した時のreturn
  */
