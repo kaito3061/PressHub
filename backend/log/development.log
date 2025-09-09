@@ -2170,3 +2170,226 @@ Started GET "/_static/out/browser/serviceWorker.js" for ::1 at 2025-09-09 13:00:
   
 ActionController::RoutingError (No route matches [GET] "/_static/out/browser/serviceWorker.js"):
   
+Started POST "/users" for ::1 at 2025-09-09 14:14:14 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (2.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 3 pending migrations:
+
+db/migrate/20250909034602_add_body_to_press_releases.rb
+db/migrate/20250909034912_create_users.rb
+db/migrate/20250909034940_add_user_id_to_press_releases.rb
+
+
+):
+  
+activerecord (8.0.2.1) lib/active_record/migration.rb:743:in 'ActiveRecord::Migration.check_pending_migrations'
+activerecord (8.0.2.1) lib/active_record/migration.rb:660:in 'block (2 levels) in ActiveRecord::Migration::CheckPending#call'
+activesupport (8.0.2.1) lib/active_support/file_update_checker.rb:85:in 'ActiveSupport::FileUpdateChecker#execute'
+activerecord (8.0.2.1) lib/active_record/migration.rb:665:in 'block in ActiveRecord::Migration::CheckPending#call'
+activerecord (8.0.2.1) lib/active_record/migration.rb:657:in 'Thread::Mutex#synchronize'
+activerecord (8.0.2.1) lib/active_record/migration.rb:657:in 'ActiveRecord::Migration::CheckPending#call'
+actionpack (8.0.2.1) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+activesupport (8.0.2.1) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+actionpack (8.0.2.1) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+actionpack (8.0.2.1) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.2.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in 'ActionDispatch::ActionableExceptions#call'
+actionpack (8.0.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in 'WebConsole::Middleware#call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in 'block in WebConsole::Middleware#call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'Kernel#catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'WebConsole::Middleware#call'
+actionpack (8.0.2.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+railties (8.0.2.1) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+railties (8.0.2.1) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+actionpack (8.0.2.1) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+actionpack (8.0.2.1) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+rack (3.2.1) lib/rack/method_override.rb:28:in 'Rack::MethodOverride#call'
+rack (3.2.1) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+actionpack (8.0.2.1) lib/action_dispatch/middleware/server_timing.rb:61:in 'block in ActionDispatch::ServerTiming#call'
+actionpack (8.0.2.1) lib/action_dispatch/middleware/server_timing.rb:26:in 'ActionDispatch::ServerTiming::Subscriber#collect_events'
+actionpack (8.0.2.1) lib/action_dispatch/middleware/server_timing.rb:60:in 'ActionDispatch::ServerTiming#call'
+actionpack (8.0.2.1) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.2.1) lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+rack (3.2.1) lib/rack/sendfile.rb:114:in 'Rack::Sendfile#call'
+actionpack (8.0.2.1) lib/action_dispatch/middleware/host_authorization.rb:143:in 'ActionDispatch::HostAuthorization#call'
+rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+railties (8.0.2.1) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+puma (7.0.1) lib/puma/configuration.rb:297:in 'Puma::Configuration::ConfigMiddleware#call'
+puma (7.0.1) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+puma (7.0.1) lib/puma/thread_pool.rb:336:in 'Puma::ThreadPool#with_force_shutdown'
+puma (7.0.1) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+puma (7.0.1) lib/puma/server.rb:497:in 'Puma::Server#process_client'
+puma (7.0.1) lib/puma/server.rb:266:in 'block in Puma::Server#run'
+puma (7.0.1) lib/puma/thread_pool.rb:172:in 'block in Puma::ThreadPool#spawn_thread'
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7260784604294177565) /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='PrtimesHakkason'*/[0m
+Migrating to AddBodyToPressReleases (20250909034602)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='PrtimesHakkason'*/[0m
+  [1m[35m (4.9ms)[0m  [1m[35mALTER TABLE "press_releases" ADD "body" text /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250909034602') RETURNING "version" /*application='PrtimesHakkason'*/[0m
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT /*application='PrtimesHakkason'*/[0m
+Migrating to CreateUsers (20250909034912)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='PrtimesHakkason'*/[0m
+  [1m[35m (8.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250909034912') RETURNING "version" /*application='PrtimesHakkason'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='PrtimesHakkason'*/[0m
+Migrating to AddUserIdToPressReleases (20250909034940)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='PrtimesHakkason'*/[0m
+  [1m[35m (2.2ms)[0m  [1m[35mALTER TABLE "press_releases" ADD "user_id" bigint NOT NULL /*application='PrtimesHakkason'*/[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE INDEX "index_press_releases_on_user_id" ON "press_releases" ("user_id") /*application='PrtimesHakkason'*/[0m
+  [1m[35m (4.3ms)[0m  [1m[35mALTER TABLE "press_releases" ADD CONSTRAINT "fk_rails_ae68203b62"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+ /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250909034940') RETURNING "version" /*application='PrtimesHakkason'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='PrtimesHakkason'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7260784604294177565) /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='PrtimesHakkason'*/[0m
+  [1m[35m (25.7ms)[0m  [1m[35mCREATE DATABASE "prtimes_hakkason_development" ENCODING = 'unicode' /*application='PrtimesHakkason'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='PrtimesHakkason'*/[0m
+  [1m[35m (12.9ms)[0m  [1m[35mCREATE DATABASE "prtimes_hakkason_test" ENCODING = 'unicode' /*application='PrtimesHakkason'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7260784604294177565) /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='PrtimesHakkason'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7260784604294177565) /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+Started POST "/users" for ::1 at 2025-09-09 14:15:36 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+Processing by UsersController#create as */*
+  Parameters: {"user" => {"name" => "テストユーザー", "email" => "[FILTERED]"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='create',application='PrtimesHakkason',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:4:in 'UsersController#create'
+  [1m[36mUser Create (2.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "created_at", "updated_at") VALUES ('テストユーザー', 'test@example.com', '2025-09-09 05:15:36.823640', '2025-09-09 05:15:36.823640') RETURNING "id" /*action='create',application='PrtimesHakkason',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:4:in 'UsersController#create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*action='create',application='PrtimesHakkason',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:4:in 'UsersController#create'
+Completed 201 Created in 28ms (Views: 0.3ms | ActiveRecord: 13.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/press_releases" for ::1 at 2025-09-09 14:15:47 +0900
+Processing by PressReleasesController#create as */*
+  Parameters: {"press_release" => {"title" => "テストタイトル", "body" => "本文", "content" => "本文"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1 /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:17:in 'PressReleasesController#create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:18:in 'PressReleasesController#create'
+  [1m[36mPressRelease Create (3.7ms)[0m  [1m[32mINSERT INTO "press_releases" ("title", "content", "created_at", "updated_at", "body", "user_id") VALUES ('テストタイトル', '本文', '2025-09-09 05:15:47.815459', '2025-09-09 05:15:47.815459', '本文', 1) RETURNING "id" /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:18:in 'PressReleasesController#create'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:18:in 'PressReleasesController#create'
+Completed 201 Created in 27ms (Views: 0.2ms | ActiveRecord: 7.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for 127.0.0.1 at 2025-09-09 14:16:04 +0900
+Processing by PressReleasesController#index as HTML
+  [1m[36mPressRelease Load (0.4ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:7:in 'PressReleasesController#index'
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for 127.0.0.1 at 2025-09-09 14:24:19 +0900
+Processing by PressReleasesController#index as HTML
+  [1m[36mPressRelease Load (18.3ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:7:in 'PressReleasesController#index'
+Completed 200 OK in 26ms (Views: -0.5ms | ActiveRecord: 25.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for 127.0.0.1 at 2025-09-09 14:28:55 +0900
+Processing by PressReleasesController#index as HTML
+  [1m[36mPressRelease Load (1.1ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:7:in 'PressReleasesController#index'
+Completed 200 OK in 29ms (Views: 4.6ms | ActiveRecord: 19.1ms (1 query, 0 cached) | GC: 3.3ms)
+
+
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7260784604294177565) /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='PrtimesHakkason'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(7260784604294177565) /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='PrtimesHakkason'*/[0m
+  [1m[35m (20.6ms)[0m  [1m[35mCREATE DATABASE "prtimes_hakkason_development" ENCODING = 'unicode' /*application='PrtimesHakkason'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='PrtimesHakkason'*/[0m
+  [1m[35m (11.7ms)[0m  [1m[35mCREATE DATABASE "prtimes_hakkason_test" ENCODING = 'unicode' /*application='PrtimesHakkason'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7260784604294177565) /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='PrtimesHakkason'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7260784604294177565) /*application='PrtimesHakkason'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PrtimesHakkason'*/[0m
+Started GET "/press_releases/" for 127.0.0.1 at 2025-09-09 14:29:29 +0900
+Processing by PressReleasesController#index as HTML
+  [1m[36mPressRelease Load (0.5ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:7:in 'PressReleasesController#index'
+Completed 200 OK in 11ms (Views: 2.9ms | ActiveRecord: 5.1ms (1 query, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/press_releases/" for 127.0.0.1 at 2025-09-09 14:29:35 +0900
+Processing by PressReleasesController#index as HTML
+  [1m[36mPressRelease Load (0.5ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:7:in 'PressReleasesController#index'
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for 127.0.0.1 at 2025-09-09 14:29:35 +0900
+Processing by PressReleasesController#index as HTML
+  [1m[36mPressRelease Load (0.4ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:7:in 'PressReleasesController#index'
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for 127.0.0.1 at 2025-09-09 14:33:57 +0900
+Processing by PressReleasesController#index as HTML
+  [1m[36mPressRelease Load (1.4ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:7:in 'PressReleasesController#index'
+Completed 200 OK in 7ms (Views: 5.1ms | ActiveRecord: 1.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for 127.0.0.1 at 2025-09-09 14:36:31 +0900
+Processing by PressReleasesController#index as HTML
+  [1m[36mPressRelease Load (1.0ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:7:in 'PressReleasesController#index'
+Completed 200 OK in 5ms (Views: 3.7ms | ActiveRecord: 1.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='PrtimesHakkason'*/[0m
+  [1m[36mPressRelease Create (3.6ms)[0m  [1m[32mINSERT INTO "press_releases" ("title", "content", "created_at", "updated_at", "body", "user_id") VALUES ('サンプルタイトル', 'サンプル本文', '2025-09-09 05:39:01.936708', '2025-09-09 05:39:01.936708', NULL, 1) RETURNING "id" /*application='PrtimesHakkason'*/[0m
+  [1m[36mTRANSACTION (7.2ms)[0m  [1m[35mCOMMIT /*application='PrtimesHakkason'*/[0m
+  [1m[36mPressRelease Load (1.1ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /* loading for pp */ LIMIT 11 /*application='PrtimesHakkason'*/[0m
+  [1m[36mPressRelease Load (1.5ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" WHERE "press_releases"."id" = 1 LIMIT 1 /*application='PrtimesHakkason'*/[0m
+  [1m[36mPressRelease Load (0.5ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" WHERE "press_releases"."id" = 2 LIMIT 1 /*application='PrtimesHakkason'*/[0m
+Started POST "/press_releases" for 127.0.0.1 at 2025-09-09 14:44:40 +0900
+Processing by PressReleasesController#create as */*
+  Parameters: {"press_release" => {"title" => "", "content" => ""}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1 /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:17:in 'PressReleasesController#create'
+Completed 422 Unprocessable Content in 49ms (Views: 0.2ms | ActiveRecord: 17.3ms (1 query, 0 cached) | GC: 2.6ms)
+
+
+Started POST "/press_releases" for 127.0.0.1 at 2025-09-09 14:45:13 +0900
+Processing by PressReleasesController#create as */*
+  Parameters: {"press_release" => {"title" => "OKテスト", "content" => "本文"}}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1 /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:17:in 'PressReleasesController#create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:18:in 'PressReleasesController#create'
+  [1m[36mPressRelease Create (2.4ms)[0m  [1m[32mINSERT INTO "press_releases" ("title", "content", "created_at", "updated_at", "body", "user_id") VALUES ('OKテスト', '本文', '2025-09-09 05:45:13.066012', '2025-09-09 05:45:13.066012', NULL, 1) RETURNING "id" /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:18:in 'PressReleasesController#create'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:18:in 'PressReleasesController#create'
+Completed 201 Created in 10ms (Views: 0.2ms | ActiveRecord: 4.8ms (2 queries, 0 cached) | GC: 0.7ms)
+
+
+Started GET "/press_releases" for 127.0.0.1 at 2025-09-09 14:45:23 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.7ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:7:in 'PressReleasesController#index'
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
