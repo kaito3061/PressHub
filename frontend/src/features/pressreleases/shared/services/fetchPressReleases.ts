@@ -1,3 +1,4 @@
+import { baseUrl } from "../const/baseUrl";
 import { PressReleaseType } from "../types/PressRelease";
 
 /**
@@ -5,7 +6,7 @@ import { PressReleaseType } from "../types/PressRelease";
  * @returns {Promise<PressReleases[]>} プレスリリース一覧
  */
 export default async function fetchPressReleases(): Promise<PressReleaseType[]> {
-  const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "/press_releases/");
+  const data = await fetch(`${baseUrl}/press_releases/`);
   const pressReleases: PressReleaseType[] = await data.json();
 
   return pressReleases;
