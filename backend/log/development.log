@@ -2494,3 +2494,83 @@ Processing by PressReleasesController#index as */*
 Completed 200 OK in 4ms (Views: 3.6ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
 
 
+Started GET "/press_releases/" for ::1 at 2025-09-09 20:17:54 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.3ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 7ms (Views: 6.7ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/press_releases/" for ::1 at 2025-09-09 20:17:56 +0900
+Processing by PressReleasesController#create as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1 /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:21:in 'PressReleasesController#create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+  [1m[36mPressRelease Create (1.0ms)[0m  [1m[32mINSERT INTO "press_releases" ("title", "content", "created_at", "updated_at", "user_id") VALUES (NULL, NULL, '2025-09-09 11:17:56.454857', '2025-09-09 11:17:56.454857', NULL) RETURNING "id" /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+Completed 201 Created in 14ms (Views: 2.4ms | ActiveRecord: 2.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 20:17:57 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.4ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 12ms (Views: 12.0ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/press_releases/" for ::1 at 2025-09-09 20:18:03 +0900
+Processing by PressReleasesController#create as */*
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1 /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:21:in 'PressReleasesController#create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+  [1m[36mPressRelease Create (1.7ms)[0m  [1m[32mINSERT INTO "press_releases" ("title", "content", "created_at", "updated_at", "user_id") VALUES (NULL, NULL, '2025-09-09 11:18:03.571599', '2025-09-09 11:18:03.571599', NULL) RETURNING "id" /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+Completed 201 Created in 26ms (Views: 0.5ms | ActiveRecord: 3.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 20:18:26 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.3ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/press_releases/" for ::1 at 2025-09-09 20:18:28 +0900
+Processing by PressReleasesController#create as */*
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1 /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:21:in 'PressReleasesController#create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+  [1m[36mPressRelease Create (1.4ms)[0m  [1m[32mINSERT INTO "press_releases" ("title", "content", "created_at", "updated_at", "user_id") VALUES (NULL, NULL, '2025-09-09 11:18:28.623189', '2025-09-09 11:18:28.623189', NULL) RETURNING "id" /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+Completed 201 Created in 12ms (Views: 0.5ms | ActiveRecord: 3.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/press_releases/" for ::1 at 2025-09-09 20:18:32 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (0.3ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/press_releases/" for ::1 at 2025-09-09 20:18:44 +0900
+Processing by PressReleasesController#create as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1 /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:21:in 'PressReleasesController#create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+  [1m[36mPressRelease Create (1.6ms)[0m  [1m[32mINSERT INTO "press_releases" ("title", "content", "created_at", "updated_at", "user_id") VALUES (NULL, NULL, '2025-09-09 11:18:44.499245', '2025-09-09 11:18:44.499245', NULL) RETURNING "id" /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT /*action='create',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:23:in 'PressReleasesController#create'
+Completed 201 Created in 15ms (Views: 0.4ms | ActiveRecord: 3.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
