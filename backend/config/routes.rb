@@ -1,4 +1,3 @@
-
 # config/routes.rb
 Rails.application.routes.draw do
   root to: 'press_releases#index'
@@ -8,4 +7,6 @@ Rails.application.routes.draw do
     resources :comments, only: [:create]
     resources :revisions, only: [:index, :create]
   end
+
+  resources :users
 end

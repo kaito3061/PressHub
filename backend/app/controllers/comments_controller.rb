@@ -21,4 +21,8 @@ class CommentsController < ApplicationController
   def comment_params
     params.require(:comment).permit(:content)
   end
+
+  def press_release_params
+    params.require(:press_release).permit(:title, :body)
+  end
 end

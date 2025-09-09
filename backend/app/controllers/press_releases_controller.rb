@@ -3,17 +3,18 @@ class PressReleasesController < ApplicationController
   before_action :set_press_release, only: %i[show update destroy]
 
   def index
-    @press_releases = PressRelease.all
-    render json: @press_releases.to_json(include: [:uploads, :comments, :revisions])
+  @press_releases = PressRelease.all
+  render json: @press_releases
   end
 
   def show
-    render json: @press_release.to_json(include: [:uploads, :comments, :revisions])
+  render json: @press_release
   end
 
   def create
-    @press_release = PressRelease.new(press_release_params)
-    @press_release.user = current_user
+  @press_release = PressRelease.new(press_release_params)
+  # 認証未実装の場合は仮ユーザーをセット
+  @press_release.user = User.first
     if @press_release.save
       render json: @press_release, status: :created
     else
@@ -41,6 +42,6 @@ class PressReleasesController < ApplicationController
   end
 
   def press_release_params
-    params.require(:press_release).permit(:title, :content)
+  params.require(:press_release).permit(:title, :body, :content)
   end
 end
