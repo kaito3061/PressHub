@@ -85,6 +85,19 @@ const eslintConfig = [
       ],
     },
   },
+
+  {
+    files: ["**/shadcn/**/*"],
+    rules: {
+      "@typescript-eslint/naming-convention": [
+        "error",
+        {
+          selector: "function",
+          format: ["PascalCase", "camelCase"],
+        },
+      ],
+    },
+  },
 ];
 
 export default eslintConfig;

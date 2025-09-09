@@ -1,5 +1,5 @@
 class PressRelease < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   has_many :revisions, dependent: :destroy
   has_many :uploads, dependent: :destroy
   has_many :comments, dependent: :destroy
