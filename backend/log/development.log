@@ -2574,3 +2574,10 @@ Processing by PressReleasesController#create as */*
 Completed 201 Created in 15ms (Views: 0.4ms | ActiveRecord: 3.2ms (2 queries, 0 cached) | GC: 0.0ms)
 
 
+Started GET "/press_releases/" for ::1 at 2025-09-09 20:26:41 +0900
+Processing by PressReleasesController#index as */*
+  [1m[36mPressRelease Load (19.2ms)[0m  [1m[34mSELECT "press_releases".* FROM "press_releases" /*action='index',application='PrtimesHakkason',controller='press_releases'*/[0m
+  ↳ app/controllers/press_releases_controller.rb:8:in 'PressReleasesController#index'
+Completed 200 OK in 24ms (Views: -5.2ms | ActiveRecord: 28.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+

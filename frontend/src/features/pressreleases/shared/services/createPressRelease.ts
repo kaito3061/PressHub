@@ -7,12 +7,10 @@ import { PressReleaseType } from "../types/PressRelease";
  */
 export default async function createPressRelease(): Promise<PressReleaseType | undefined> {
   try {
-    console.log(baseUrl);
     const data = await fetch(`${baseUrl}/press_releases/`, {
       method: "POST",
     });
 
-    console.log(data);
     const PressRelease = await data.json();
     if (PressRelease.id === undefined) {
       throw new Error("PressRelease ID is undefined");
