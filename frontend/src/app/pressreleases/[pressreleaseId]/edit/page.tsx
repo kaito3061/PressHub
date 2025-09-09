@@ -38,7 +38,7 @@ export default function PressReleaseEditPage() {
     };
   }, [article.doc, debouncedAutoSave]);
 
-  const { editor, navigateToLine } = useMarkdownEditor({
+  const { editor, navigateToLine, navigateToEnd } = useMarkdownEditor({
     doc: article.doc,
     setDoc: (doc) => setArticle({ ...article, doc }),
     savePreview,
@@ -50,19 +50,31 @@ export default function PressReleaseEditPage() {
       <div className="flex h-full flex-1">
         <LeftSidebar doc={article.doc} onJump={(line) => navigateToLine(line)} />
         {/* メインコンテンツエリア */}
-        <div className="h-full w-full">
+        <div className="h-full w-full relative">
           {isEdit ? (
-            <div className="ml-8 mt-10">
-              <input
-                className="w-full text-4xl font-bold tracking-wider focus:outline-none"
-                placeholder="リリースタイトルを入力"
-                value={article.title}
-                onChange={(e) => setArticle({ ...article, title: e.target.value })}
-              />
-              <div ref={editor} className="mt-10" />
+            <div className="h-full bg-gray-50 flex flex-col">
+              <div className="mx-8 pt-10 flex-1">
+                <input
+                  className="w-full text-4xl font-bold tracking-wider focus:outline-none bg-transparent"
+                  placeholder="リリースタイトルを入力"
+                  value={article.title}
+                  onChange={(e) => setArticle({ ...article, title: e.target.value })}
+                />
+                <div ref={editor} className="mt-10" />
+              </div>
+              {/* クリック可能な下部余白 */}
+              <div
+                className="sticky bottom-0 h-8 bg-gray-50 hover:bg-gray-100 cursor-pointer flex items-center justify-center text-gray-400 hover:text-gray-600 border-t border-gray-200"
+                onClick={navigateToEnd}
+                title="クリックして最下行に移動"
+              >
+                <div className="text-sm">↓ クリックして最下行に移動 ↓</div>
+              </div>
             </div>
           ) : (
-            <Preview html={html} />
+            <div className="m-10">
+              <Preview html={html} />
+            </div>
           )}
         </div>
         <RightSidebar doc={article.doc} isEdit={isEdit} onToggle={setIsEdit} />

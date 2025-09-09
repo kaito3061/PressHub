@@ -15,7 +15,7 @@ export const useMarkdownEditor = ({ doc, setDoc, savePreview }: EditorSetup) => 
   );
 
   // エディターの操作
-  const { navigateToLine } = useEditorActions(editorView);
+  const { navigateToLine, navigateToEnd } = useEditorActions(editorView);
 
   // キーマップ設定
   const customKeymap = useMemo(() => createEditorKeymap(savePreview), [savePreview]);
@@ -57,5 +57,6 @@ export const useMarkdownEditor = ({ doc, setDoc, savePreview }: EditorSetup) => 
   return {
     editor,
     navigateToLine,
+    navigateToEnd,
   };
 };

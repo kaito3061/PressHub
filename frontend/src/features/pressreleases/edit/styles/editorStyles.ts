@@ -35,6 +35,7 @@ export const editorTheme = EditorView.theme({
   },
   "&.cm-editor .cm-content": {
     minHeight: "100%",
+    paddingBottom: "200px", // 下部に余白を追加
   },
   // 選択範囲の背景色
   ".cm-selectionBackground": {

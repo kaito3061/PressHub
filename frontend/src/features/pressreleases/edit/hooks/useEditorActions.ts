@@ -21,7 +21,22 @@ export const useEditorActions = (editorView: EditorView | null) => {
     [editorView]
   );
 
+  // 最下行に移動する
+  const navigateToEnd = useCallback(() => {
+    if (!editorView) return;
+    const doc = editorView.state.doc;
+    const lastLine = doc.line(doc.lines);
+    const endPosition = lastLine.to;
+
+    editorView.dispatch({
+      selection: EditorSelection.cursor(endPosition),
+      effects: EditorView.scrollIntoView(endPosition, { y: "center" }),
+    });
+    editorView.focus();
+  }, [editorView]);
+
   return {
     navigateToLine,
+    navigateToEnd,
   };
 };
