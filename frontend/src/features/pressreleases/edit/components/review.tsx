@@ -74,17 +74,33 @@ const Review = () => {
     0
   );
 
+  // 社内レビューのコメント数（仮の値）
+  const internalCommentsCount = internalComments.length;
+
+  // 総通知数
+  const totalNotificationCount = totalSpellCheckCount + internalCommentsCount;
+
   return (
     <div>
       <Sheet>
         <SheetTrigger asChild>
-          <button
-            type="button"
-            className="rounded-full border border-gray-300 text-gray-600 w-10 h-10 flex items-center justify-center hover:bg-gray-50 cursor-pointer"
-            aria-label="レビューを開く"
-          >
-            <FaListCheck />
-          </button>
+          <div className="relative">
+            <button
+              type="button"
+              className="rounded-full border border-gray-300 text-gray-600 w-10 h-10 flex items-center justify-center hover:bg-gray-50 cursor-pointer"
+              aria-label="レビューを開く"
+            >
+              <FaListCheck />
+            </button>
+            {totalNotificationCount > 0 && (
+              <Badge
+                variant="destructive"
+                className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs min-w-[20px]"
+              >
+                {totalNotificationCount}
+              </Badge>
+            )}
+          </div>
         </SheetTrigger>
         <SheetContent side="right" className="w-[420px] sm:w-[460px]">
           <SheetHeader>

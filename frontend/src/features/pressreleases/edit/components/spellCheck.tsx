@@ -5,7 +5,7 @@ import { useSpellCheckContext } from "../context/spellCheckContext";
 
 const SpellCheck = ({ doc }: { doc: string }) => {
   const { state, dispatch } = useSpellCheckContext();
-  const { latestResult, isLoading, error } = state;
+  const { isLoading } = state;
 
   const handleSpellCheck = async () => {
     if (isLoading) return;
@@ -44,10 +44,6 @@ const SpellCheck = ({ doc }: { doc: string }) => {
           <LiaSpellCheckSolid />
         )}
       </button>
-      {latestResult && latestResult.messages && latestResult.messages.length > 0 && (
-        <div className="text-xs text-gray-500">{latestResult.messages.length}件の指摘</div>
-      )}
-      {error && <div className="text-xs text-red-500 max-w-xs text-center">{error}</div>}
     </div>
   );
 };
