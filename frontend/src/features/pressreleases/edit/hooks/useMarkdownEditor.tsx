@@ -7,11 +7,11 @@ import { useEditorActions } from "./useEditorActions";
 import { createEditorKeymap } from "../config/editorKeymaps";
 import { createEditorExtensions } from "../config/editorExtensions";
 
-export const useMarkdownEditor = ({ doc, setDoc, savePreview }: EditorSetup) => {
+export const useMarkdownEditor = ({ content, setContent, savePreview }: EditorSetup) => {
   // エディターの状態管理
   const { container, editorView, setEditorView, editor, updateListener } = useEditorState(
-    doc,
-    setDoc
+    content,
+    setContent
   );
 
   // エディターの操作
@@ -31,7 +31,7 @@ export const useMarkdownEditor = ({ doc, setDoc, savePreview }: EditorSetup) => 
     if (!container) return;
 
     const state = EditorState.create({
-      doc,
+      doc: content,
       extensions: [updateListener],
     });
 
