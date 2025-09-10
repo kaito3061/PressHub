@@ -2,11 +2,16 @@ class CommentsController < ApplicationController
   # コメントを作るときに、どのプレスリリースに紐づけるかを先に探しておく
   before_action :set_press_release
 
+  def index
+    @comments = @press_release.comments.includes(:user)
+    render json: @comments
+  end
+
   def create
     # 選ばれたプレスリリースに、紐づいたコメントを新しく作る
     @comment = @press_release.comments.new(comment_params)
     # current_user が存在すれば紐付け、いなければゲストコメントとして作成
-    @comment.user = current_user if current_user.present?
+    @press_release.user = User.first
 
     if @comment.save
       render json: @comment, status: :created
