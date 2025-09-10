@@ -1,5 +1,3 @@
-"use client";
-
 import PressReleaseEditClient from "@/features/pressreleases/edit/components/press-release-edit-client";
 import { Metadata } from "next";
 
