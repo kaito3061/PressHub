@@ -1,5 +1,5 @@
 export type EditorSetup = {
-  doc: string;
-  setDoc: (doc: string) => void;
+  content: string;
+  setContent: (content: string) => void;
   savePreview: () => void;
 };

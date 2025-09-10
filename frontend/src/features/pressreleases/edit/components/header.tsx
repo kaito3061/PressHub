@@ -1,26 +1,18 @@
-import React, { useState } from "react";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaFlagCheckered } from "react-icons/fa";
 import { FiSave } from "react-icons/fi";
 import { Button } from "@/features/shadcn/components/ui/button";
 
-const Header = ({ canSave: canSaveProps, doc }: { canSave: boolean; doc: string }) => {
-  const [canSave, setCanSave] = useState(canSaveProps);
-  const saveArticle = () => {
-    try {
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/press-releases/new`, {
-        method: "POST",
-        body: JSON.stringify({
-          doc,
-        }),
-      });
-      setCanSave(false);
-    } catch (err) {
-      console.error(err);
-      setCanSave(false);
-    }
-  };
+const Header = ({
+  isSaving,
+  onSave,
+}: {
+  title: string;
+  content: string;
+  isSaving: boolean;
+  onSave: () => void;
+}) => {
   return (
     <div className="flex items-center justify-between p-4 border-b border-gray-200 sticky top-0 bg-white z-20 max-h-16">
       <div className="flex items-center justify-center gap-4 ml-4">
@@ -34,9 +26,9 @@ const Header = ({ canSave: canSaveProps, doc }: { canSave: boolean; doc: string 
           <FaFlagCheckered />
           最終チェック
         </Button>
-        <Button onClick={saveArticle} disabled={!canSave}>
+        <Button onClick={onSave} disabled={isSaving}>
           <FiSave />
-          保存
+          {isSaving ? "保存中..." : "保存"}
         </Button>
       </div>
     </div>

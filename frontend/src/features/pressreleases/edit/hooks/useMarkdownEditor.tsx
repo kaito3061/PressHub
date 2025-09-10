@@ -35,6 +35,7 @@ export const useMarkdownEditor = ({ doc, setDoc, savePreview }: EditorSetup) => 
       extensions: [updateListener],
     });
 
+
     if (editorView) {
       editorView.destroy();
     }
