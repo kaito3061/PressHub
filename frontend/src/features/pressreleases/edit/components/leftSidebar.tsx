@@ -1,13 +1,29 @@
 import React from "react";
 
 type LeftSidebarProps = {
-  doc: string;
+  content: string;
   onJump: (line: number) => void;
 };
 
-const LeftSidebar = ({ doc, onJump }: LeftSidebarProps) => {
-  const wordCount = doc.split(/\s+/).length - 1;
-  const imageCount = doc.match(/!\[.*?\]\(.*?\)/g)?.length || 0;
+const LeftSidebar = ({ content, onJump }: LeftSidebarProps) => {
+  // contentがundefinedやnullの場合のガード
+  const safeContent = content || "";
+
+  // 日本語の文字数をカウント
+  const characterCount = safeContent
+    .replace(/\s+/g, "")
+    .replace(/#+\s+/g, "")
+    .replace(/\*\*([^*]+)\*\*/g, "$1")
+    .replace(/\*([^*]+)\*/g, "$1")
+    .replace(/`([^`]+)`/g, "$1")
+    .replace(/!\[.*?\]\(.*?\)/g, "")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/^\s*[-*+]\s+/gm, "")
+    .replace(/^\s*\d+\.\s+/gm, "")
+    .replace(/^>\s*/gm, "")
+    .replace(/\n/g, "").length;
+
+  const imageCount = safeContent.match(/!\[.*?\]\(.*?\)/g)?.length || 0;
   const handleHeadingClick = (line: number) => {
     onJump?.(line);
   };
@@ -15,7 +31,7 @@ const LeftSidebar = ({ doc, onJump }: LeftSidebarProps) => {
     <div className="flex flex-col w-70 p-4 border-r border-gray-300 sticky left-0 z-0 min-h-screen">
       <p className="text-xl font-bold">目次</p>
       <div className="flex flex-col gap-2 mt-3 ml-4">
-        {doc.split("\n").map((line, idx) => {
+        {safeContent.split("\n").map((line, idx) => {
           if (!line.startsWith("## ")) return null;
           const label = line.replace("## ", "");
           return (
@@ -34,7 +50,7 @@ const LeftSidebar = ({ doc, onJump }: LeftSidebarProps) => {
       <div className="flex flex-col gap-1 mt-8 p-3 text-right text-base text-gray-600">
         <div className="flex gap-1 justify-between">
           <p>文字数:</p>
-          <p>{wordCount} / 8000</p>
+          <p>{characterCount} / 8000</p>
         </div>
         <div className="flex gap-1 justify-between">
           <p>画像:</p>
