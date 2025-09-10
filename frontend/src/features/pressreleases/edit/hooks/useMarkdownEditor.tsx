@@ -7,7 +7,7 @@ import { tags } from "@lezer/highlight";
 import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
 import { EditorSetup } from "../types/editorSetup";
 
-export const useMarkdownEditor = ({ doc, setDoc, savePreview }: EditorSetup) => {
+export const useMarkdownEditor = ({ content, setContent, savePreview }: EditorSetup) => {
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [editorView, setEditorView] = useState<EditorView | null>(null);
   // Reactのcallback refで常に最新のDOMノードを受け取る
@@ -23,6 +23,7 @@ export const useMarkdownEditor = ({ doc, setDoc, savePreview }: EditorSetup) => 
         key: "Mod-s",
         run() {
           savePreview();
+          console.log("savePreview");
           return true;
         },
       },
@@ -36,10 +37,10 @@ export const useMarkdownEditor = ({ doc, setDoc, savePreview }: EditorSetup) => 
     return EditorView.updateListener.of((update: ViewUpdate) => {
       if (update.docChanged) {
         // エディタのテキストが更新されるたびにdocを更新する
-        setDoc(update.state.doc.toString());
+        setContent(update.state.doc.toString());
       }
     });
-  }, [setDoc]);
+  }, [setContent]);
 
   // Markdown記法のハイライト設定
   const highlightStyle = HighlightStyle.define([
@@ -107,7 +108,7 @@ export const useMarkdownEditor = ({ doc, setDoc, savePreview }: EditorSetup) => 
     const state =
       editorView?.state ??
       EditorState.create({
-        doc,
+        doc: content,
         extensions: [updateListener],
       });
 

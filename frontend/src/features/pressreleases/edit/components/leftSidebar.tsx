@@ -1,13 +1,13 @@
 import React from "react";
 
 type LeftSidebarProps = {
-  doc: string;
+  content: string;
   onJump: (line: number) => void;
 };
 
-const LeftSidebar = ({ doc, onJump }: LeftSidebarProps) => {
-  const wordCount = doc.split(/\s+/).length - 1;
-  const imageCount = doc.match(/!\[.*?\]\(.*?\)/g)?.length || 0;
+const LeftSidebar = ({ content, onJump }: LeftSidebarProps) => {
+  const wordCount = content.split(/\s+/).length - 1;
+  const imageCount = content.match(/!\[.*?\]\(.*?\)/g)?.length || 0;
   const handleHeadingClick = (line: number) => {
     onJump?.(line);
   };
@@ -15,7 +15,7 @@ const LeftSidebar = ({ doc, onJump }: LeftSidebarProps) => {
     <div className="flex flex-col w-70 p-4 border-r border-gray-300 sticky left-0 z-0 min-h-screen">
       <p className="text-xl font-bold">目次</p>
       <div className="flex flex-col gap-2 mt-3 ml-4">
-        {doc.split("\n").map((line, idx) => {
+        {content.split("\n").map((line, idx) => {
           if (!line.startsWith("## ")) return null;
           const label = line.replace("## ", "");
           return (
