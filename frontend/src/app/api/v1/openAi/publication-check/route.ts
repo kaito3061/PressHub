@@ -1,23 +1,84 @@
-import { openAiClient } from "@/features/openai/services/client";
-import { promptLoader } from "@/features/openai/services/promptLoader";
-import { fileNameEnum } from "@/features/openai/types/FileNameEnum";
-import { PublicationCheckResult } from "@/features/openai/types/publicationCheckResult";
+import OpenAI from "openai";
 import { NextRequest, NextResponse } from "next/server";
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+export interface PublicationCheckResult {
+  /** 新規情報の包含 */
+  newInformation: {
+    status: "PASS" | "FAIL";
+    violations?: string[];
+  };
+  /** 発信主体と登録企業の関係性 */
+  senderRelationship: {
+    status: "PASS" | "FAIL";
+    violations?: string[];
+  };
+  /** 誤字脱字 */
+  typos: {
+    status: "PASS" | "FAIL";
+    violations?: string[];
+  };
+  /** 誹謗中傷・差別表現 */
+  discrimination: {
+    status: "PASS" | "FAIL";
+    violations?: string[];
+  };
+  /** 法令違反 */
+  legalViolations: {
+    status: "PASS" | "FAIL";
+    violations?: string[];
+  };
+  /** メディア掲載実績 */
+  mediaCoverage: {
+    status: "PASS" | "FAIL";
+    violations?: string[];
+  };
+  /** 商品再販 */
+  productResale: {
+    status: "PASS" | "FAIL";
+    violations?: string[];
+  };
+  /** 調査レポート */
+  surveyReport: {
+    status: "PASS" | "FAIL";
+    violations?: string[];
+  };
+  /** 婚活イベント */
+  marriageEvent: {
+    status: "PASS" | "FAIL";
+    violations?: string[];
+  };
+  /** ビフォー・アフター画像 */
+  beforeAfterImages: {
+    status: "PASS" | "FAIL";
+    violations?: string[];
+  };
+  /** 性的表現画像 */
+  sexualContent: {
+    status: "PASS" | "FAIL";
+    violations?: string[];
+  };
+  /** 医療・美容系業種 */
+  medicalBeauty: {
+    status: "PASS" | "FAIL";
+    violations?: string[];
+  };
+  /** 総合判定 */
+  overallResult: {
+    status: "PASS" | "FAIL";
+    summary: string;
+  };
+}
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
   const { doc } = body;
-  const prompt = await promptLoader({ fileName: fileNameEnum.publicationCheck });
-
-  if (prompt === undefined) {
-    return NextResponse.json(
-      { message: "プロンプトを読み取ることができませんでした。" },
-      { status: 500 }
-    );
-  }
 
   try {
-    const completion = await openAiClient.chat.completions.create({
+    const completion = await openai.chat.completions.create({
       model: "gpt-4o",
       messages: [
         {
@@ -45,14 +106,9 @@ export async function POST(req: NextRequest) {
         },
         {
           role: "user",
-          content: `
-          ${prompt}
-          
-          \n\n---\n\n
-          以上の基準をもとに以下のPress Releaseの記事を評価し、上記のJSON形式で結果を返してください：
-          
-          \n\n---\n\n
-          ${doc}`,
+          content: `以下のPress Releaseの記事を評価し、上記のJSON形式で結果を返してください：
+
+${doc}`,
         },
       ],
       response_format: { type: "json_object" },
