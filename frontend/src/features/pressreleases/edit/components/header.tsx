@@ -16,10 +16,10 @@ const Header = ({
   return (
     <div className="flex items-center justify-between p-4 border-b border-gray-200 sticky top-0 bg-white z-20 max-h-16">
       <div className="flex items-center justify-center gap-4 ml-4">
-        <Link href="/" className="text-xl">
+        <Link href="/pressreleases" className="text-xl">
           <FaArrowLeft />
         </Link>
-        <p className="text-xl font-bold">記事一覧へ</p>
+        <p className="text-xl font-bold">掲載物一覧へ</p>
       </div>
       <div className="flex items-center justify-center gap-4">
         <Button variant="outline">
