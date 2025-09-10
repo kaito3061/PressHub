@@ -1,13 +1,13 @@
 "use client";
-import React, { useState, useCallback, useEffect } from "react";
-import { useDebouncedCallback } from "use-debounce";
-import markdownHtml from "zenn-markdown-html";
 
-import { useMarkdownEditor } from "@/features/pressreleases/edit/hooks/useMarkdownEditor";
-import { Preview } from "@/features/pressreleases/edit/components/preview";
 import Header from "@/features/pressreleases/edit/components/header";
 import LeftSidebar from "@/features/pressreleases/edit/components/leftSidebar";
 import RightSidebar from "@/features/pressreleases/edit/components/rightSidebar";
+import { useMarkdownEditor } from "@/features/pressreleases/edit/hooks/useMarkdownEditor";
+import { Preview } from "@/features/pressreleases/shared/components/preview";
+import { useCallback, useEffect, useState } from "react";
+import { useDebouncedCallback } from "use-debounce";
+import markdownHtml from "zenn-markdown-html";
 
 export default function PressReleaseEditPage() {
   const [html, setHtml] = useState<string>("");
