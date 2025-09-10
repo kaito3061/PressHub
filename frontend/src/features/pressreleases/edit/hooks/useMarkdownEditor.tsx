@@ -1,118 +1,39 @@
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useEffect, useMemo } from "react";
 import { EditorState, StateEffect } from "@codemirror/state";
-import { HighlightStyle, syntaxHighlighting } from "@codemirror/language";
-import { EditorView, ViewUpdate, keymap, placeholder } from "@codemirror/view";
-import { history } from "@codemirror/commands";
-import { tags } from "@lezer/highlight";
-import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
+import { EditorView } from "@codemirror/view";
 import { EditorSetup } from "../types/editorSetup";
+import { useEditorState } from "./useEditorState";
+import { useEditorActions } from "./useEditorActions";
+import { createEditorKeymap } from "../config/editorKeymaps";
+import { createEditorExtensions } from "../config/editorExtensions";
 
-export const useMarkdownEditor = ({ doc, setDoc, savePreview }: EditorSetup) => {
-  const [container, setContainer] = useState<HTMLDivElement | null>(null);
-  const [editorView, setEditorView] = useState<EditorView | null>(null);
-  // Reactのcallback refで常に最新のDOMノードを受け取る
-  const editor = useCallback((node: HTMLDivElement | null) => {
-    setContainer(node);
-  }, []);
+export const useMarkdownEditor = ({ content, setContent, savePreview }: EditorSetup) => {
+  // エディターの状態管理
+  const { container, editorView, setEditorView, editor, updateListener } = useEditorState(
+    content,
+    setContent
+  );
 
-  // Editor内のキーマップ設定
-  const customKeymap = useMemo(() => {
-    return keymap.of([
-      {
-        // 本文の保存
-        key: "Mod-s",
-        run() {
-          savePreview();
-          return true;
-        },
-      },
-    ]);
-  }, [savePreview]);
+  // エディターの操作
+  const { navigateToLine, navigateToEnd } = useEditorActions(editorView);
 
-  // editorのrefはcallbackでcontainerに反映するため副作用は不要
+  // キーマップ設定
+  const customKeymap = useMemo(() => createEditorKeymap(savePreview), [savePreview]);
 
-  // Editorの状態が更新されたときの処理
-  const updateListener = useMemo(() => {
-    return EditorView.updateListener.of((update: ViewUpdate) => {
-      if (update.docChanged) {
-        // エディタのテキストが更新されるたびにdocを更新する
-        setDoc(update.state.doc.toString());
-      }
-    });
-  }, [setDoc]);
-
-  // Markdown記法のハイライト設定
-  const highlightStyle = HighlightStyle.define([
-    { tag: tags.heading1, color: "black", fontSize: "1.4em", fontWeight: "700" },
-    { tag: tags.heading2, color: "black", fontSize: "1.3em", fontWeight: "700" },
-    { tag: tags.heading3, color: "black", fontSize: "1.2em", fontWeight: "700" },
-    { tag: tags.heading4, color: "black", fontSize: "1.1em", fontWeight: "700" },
-    { tag: tags.strong, color: "black", fontWeight: "700" }, // 太字
-    { tag: tags.quote, color: "#6a737d" }, // 引用
-    { tag: tags.emphasis, fontStyle: "italic" }, // 斜体
-    { tag: tags.url, textDecoration: "underline" }, // URLに下線をつける
-    { tag: tags.strikethrough, textDecoration: "line-through" }, // 打ち消し線（GFM拡張）
-  ]);
-
-  const editorStyle = useMemo(() => {
-    return EditorView.theme({
-      "&": {
-        minHeight: "500px",
-        height: "100%",
-      },
-      // editorの外枠
-      "&.cm-editor": {
-        outline: "none", // エディターの枠線を非表示
-        height: "100%",
-      },
-      // editorの内部
-      "&.cm-editor .cm-scroller": {
-        fontFamily: `'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace, 'Segoe UI Emoji'`,
-        "-webkit-font-smoothing": "antialiased",
-        letterSpacing: "0.02em",
-        fontSize: "15px",
-        lineHeight: "1.8",
-        color: "#000000",
-        minHeight: "100%",
-      },
-      "&.cm-editor .cm-content": {
-        minHeight: "100%",
-      },
-      // 選択範囲の背景色
-      ".cm-selectionBackground": {
-        backgroundColor: "#036dd626 !important",
-      },
-    });
-  }, []);
-
-  // Editorのextensions
-  const extensions = useMemo(() => {
-    return [
-      placeholder("ここにテキストを入力してください"),
-      history(),
-      updateListener,
-      customKeymap,
-      EditorView.lineWrapping,
-      EditorState.tabSize.of(4),
-      editorStyle,
-      syntaxHighlighting(highlightStyle),
-      markdown({
-        base: markdownLanguage,
-        completeHTMLTags: false,
-      }),
-    ];
-  }, [customKeymap, updateListener, highlightStyle, editorStyle]);
+  // エディターの拡張機能
+  const extensions = useMemo(
+    () => createEditorExtensions(updateListener, customKeymap),
+    [updateListener, customKeymap]
+  );
 
   // viewを（再）初期化する。containerのマウント/切替時に再作成する
   useEffect(() => {
     if (!container) return;
 
-    const state =
-      editorView?.state ??
-      EditorState.create({
-        doc,
-        extensions: [updateListener],
-      });
+    const state = EditorState.create({
+      doc: content,
+      extensions: [updateListener],
+    });
 
     if (editorView) {
       editorView.destroy();
@@ -124,7 +45,7 @@ export const useMarkdownEditor = ({ doc, setDoc, savePreview }: EditorSetup) => 
     return () => {
       nextView.destroy();
     };
-  }, [container]);
+  }, [container, updateListener]);
 
   // extensionsを更新する
   useEffect(() => {
@@ -135,5 +56,7 @@ export const useMarkdownEditor = ({ doc, setDoc, savePreview }: EditorSetup) => 
 
   return {
     editor,
+    navigateToLine,
+    navigateToEnd,
   };
 };

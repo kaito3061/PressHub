@@ -10,16 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_09_102206) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_09_120227) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "press_release_id", null: false
+    t.bigint "user_id", null: true
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["press_release_id"], name: "index_comments_on_press_release_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "press_releases", force: :cascade do |t|
     t.string "title"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.bigint "user_id", null: true
     t.index ["user_id"], name: "index_press_releases_on_user_id"
   end
 
@@ -30,5 +40,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_09_102206) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "comments", "press_releases"
+  add_foreign_key "comments", "users"
   add_foreign_key "press_releases", "users"
 end

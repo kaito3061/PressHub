@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :press_releases do
     resources :uploads, only: [:create]
-    resources :comments, only: [:create]
+    resources :comments, only: [:index, :create]
     resources :revisions, only: [:index, :create]
   end
 
