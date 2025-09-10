@@ -5,9 +5,12 @@ type LeftSidebarProps = {
   onJump: (line: number) => void;
 };
 
-const LeftSidebar = ({ doc, onJump }: LeftSidebarProps) => {
+const LeftSidebar = ({ content, onJump }: LeftSidebarProps) => {
+  // contentがundefinedやnullの場合のガード
+  const safeContent = content || "";
+
   // 日本語の文字数をカウント
-  const characterCount = doc
+  const characterCount = safeContent
     .replace(/\s+/g, "")
     .replace(/#+\s+/g, "")
     .replace(/\*\*([^*]+)\*\*/g, "$1")
@@ -20,7 +23,7 @@ const LeftSidebar = ({ doc, onJump }: LeftSidebarProps) => {
     .replace(/^>\s*/gm, "")
     .replace(/\n/g, "").length;
 
-  const imageCount = doc.match(/!\[.*?\]\(.*?\)/g)?.length || 0;
+  const imageCount = safeContent.match(/!\[.*?\]\(.*?\)/g)?.length || 0;
   const handleHeadingClick = (line: number) => {
     onJump?.(line);
   };
@@ -28,7 +31,7 @@ const LeftSidebar = ({ doc, onJump }: LeftSidebarProps) => {
     <div className="flex flex-col w-70 p-4 border-r border-gray-300 sticky left-0 z-0 min-h-screen">
       <p className="text-xl font-bold">目次</p>
       <div className="flex flex-col gap-2 mt-3 ml-4">
-        {content.split("\n").map((line, idx) => {
+        {safeContent.split("\n").map((line, idx) => {
           if (!line.startsWith("## ")) return null;
           const label = line.replace("## ", "");
           return (
