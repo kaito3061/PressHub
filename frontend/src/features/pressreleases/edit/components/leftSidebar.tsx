@@ -28,7 +28,7 @@ const LeftSidebar = ({ content, onJump }: LeftSidebarProps) => {
     onJump?.(line);
   };
   return (
-    <div className="flex flex-col w-70 p-4 border-r border-gray-300 sticky left-0 z-0 min-h-screen">
+    <div className="flex flex-col w-70 p-4 border-r border-gray-300 sticky left-0 top-0 z-10 h-screen bg-white">
       <p className="text-xl font-bold">目次</p>
       <div className="flex flex-col gap-2 mt-3 ml-4">
         {safeContent.split("\n").map((line, idx) => {

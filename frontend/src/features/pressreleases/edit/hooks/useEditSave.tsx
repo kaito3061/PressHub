@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useSaveArticle = (title: string, doc: string) => {
+const useSaveArticle = (title: string, content: string) => {
   const [isSaving, setIsSaving] = useState(false);
 
   const saveArticle = async () => {
@@ -12,7 +12,7 @@ const useSaveArticle = (title: string, doc: string) => {
         method: "POST",
         body: JSON.stringify({
           title,
-          doc,
+          content,
         }),
       });
     } catch (err) {

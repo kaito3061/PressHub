@@ -4,33 +4,29 @@ import { useDebouncedCallback } from "use-debounce";
 import markdownHtml from "zenn-markdown-html";
 
 import { useMarkdownEditor } from "@/features/pressreleases/edit/hooks/useMarkdownEditor";
-import { Preview } from "@/features/pressreleases/edit/components/preview";
+import { Preview } from "@/features/pressreleases/shared/components/preview";
 import Header from "@/features/pressreleases/edit/components/header";
 import LeftSidebar from "@/features/pressreleases/edit/components/leftSidebar";
 import RightSidebar from "@/features/pressreleases/edit/components/rightSidebar";
 import { SpellCheckProvider } from "@/features/pressreleases/edit/context/spellCheckContext";
+import useSaveArticle from "@/features/pressreleases/edit/hooks/useEditSave";
 
 function PressReleaseEditContent() {
-  const [html, setHtml] = useState<string>("");
   const [isEdit, setIsEdit] = useState<boolean>(true);
-  const [canSave, setCanSave] = useState<boolean>(false);
   const [article, setArticle] = useState({
     title: "",
     subtitle: "",
-    doc: "",
+    content: "",
   });
+  const { saveArticle, isSaving } = useSaveArticle(article.title, article.content);
 
   const savePreview = useCallback(() => {
-    const html = markdownHtml(article.title + "\n" + article.doc);
-    setHtml(html);
-    setCanSave(true);
-    console.log(article.title + "\n" + article.doc);
-  }, [article.doc, article.title]);
+    saveArticle();
+  }, [article.content, article.title]);
 
   // 入力の最終操作から0.5秒後に自動保存
   const debouncedAutoSave = useDebouncedCallback(() => {
-    const html = markdownHtml(article.title + "\n" + article.doc);
-    setHtml(html);
+    saveArticle();
   }, 0.5);
 
   useEffect(() => {
@@ -38,19 +34,28 @@ function PressReleaseEditContent() {
     return () => {
       debouncedAutoSave.cancel();
     };
-  }, [article.doc, debouncedAutoSave]);
+  }, [article.content, debouncedAutoSave]);
+
+  const setContent = useCallback((content: string) => {
+    setArticle((prev) => ({ ...prev, content }));
+  }, []);
 
   const { editor, navigateToLine, navigateToEnd } = useMarkdownEditor({
-    doc: article.doc,
-    setDoc: (doc) => setArticle({ ...article, doc }),
+    content: article.content,
+    setContent,
     savePreview,
   });
 
   return (
-    <div className="flex flex-col h-screen">
-      <Header canSave={canSave} doc={article.doc} />
+    <div className="flex flex-col">
+      <Header
+        title={article.title}
+        content={article.content}
+        isSaving={isSaving}
+        onSave={saveArticle}
+      />
       <div className="flex h-full flex-1">
-        <LeftSidebar doc={article.doc} onJump={(line) => navigateToLine(line)} />
+        <LeftSidebar content={article.content} onJump={(line) => navigateToLine(line)} />
         {/* メインコンテンツエリア */}
         <div className="h-full w-full relative">
           {isEdit ? (
@@ -75,12 +80,12 @@ function PressReleaseEditContent() {
             </div>
           ) : (
             <div className="m-10">
-              <Preview html={html} />
+              <Preview html={markdownHtml(article.title + "\n" + article.content)} />
             </div>
           )}
         </div>
         <RightSidebar
-          doc={article.doc}
+          content={article.content}
           isEdit={isEdit}
           onToggle={setIsEdit}
           navigateToLine={navigateToLine}

@@ -3,7 +3,7 @@ import { LiaSpellCheckSolid } from "react-icons/lia";
 import { spellCheck } from "@/features/openai/hooks/useSpellCheck";
 import { useSpellCheckContext } from "../context/spellCheckContext";
 
-const SpellCheck = ({ doc }: { doc: string }) => {
+const SpellCheck = ({ content }: { content: string }) => {
   const { state, dispatch } = useSpellCheckContext();
   const { isLoading } = state;
 
@@ -11,16 +11,12 @@ const SpellCheck = ({ doc }: { doc: string }) => {
     if (isLoading) return;
 
     try {
-      console.log("校正開始 - テキスト:", doc.substring(0, 50) + "...");
       dispatch({ type: "SET_LOADING", payload: true });
       dispatch({ type: "CLEAR_RESULT" });
 
-      const result = await spellCheck(doc);
-      console.log("校正結果を受信:", result);
-      dispatch({ type: "SET_RESULT", payload: { result, originalText: doc } });
-      console.log("Contextに結果を設定完了");
+      const result = await spellCheck(content);
+      dispatch({ type: "SET_RESULT", payload: { result, originalText: content } });
     } catch (error) {
-      console.error("校正エラー:", error);
       const errorMessage =
         error instanceof Error ? error.message : "校正処理中にエラーが発生しました";
       dispatch({ type: "SET_ERROR", payload: errorMessage });

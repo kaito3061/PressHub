@@ -19,7 +19,7 @@ export const useEditorState = (doc: string, setDoc: (doc: string) => void) => {
         setDoc(update.state.doc.toString());
       }
     });
-  }, []); // setDocを依存配列から削除
+  }, [setDoc]);
 
   return {
     container,
