@@ -10,45 +10,64 @@ import LeftSidebar from "@/features/pressreleases/edit/components/leftSidebar";
 import RightSidebar from "@/features/pressreleases/edit/components/rightSidebar";
 
 export default function PressReleaseEditPage() {
-  const [html, setHtml] = useState<string>("");
   const [isEdit, setIsEdit] = useState<boolean>(true);
-  const [canSave, setCanSave] = useState<boolean>(false);
+  const [isSaving, setIsSaving] = useState<boolean>(false);
   const [article, setArticle] = useState({
     title: "",
-    subtitle: "",
-    doc: "",
+    content: "",
   });
+
+  const saveArticle = useCallback(async () => {
+    if (isSaving) return;
+
+    setIsSaving(true);
+    try {
+      await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/press-releases/new`, {
+        method: "POST",
+        body: JSON.stringify({
+          title: article.title,
+          content: article.content,
+        }),
+      });
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSaving(false);
+    }
+  }, [article.title, article.content, isSaving]);
+
   const savePreview = useCallback(() => {
-    const html = markdownHtml(article.title + "\n" + article.doc);
-    setHtml(html);
-    setCanSave(true);
-    console.log(article.title + "\n" + article.doc);
-  }, [article.doc, article.title]);
+    saveArticle();
+  }, [saveArticle]);
 
   // 入力の最終操作から0.5秒後に自動保存
   const debouncedAutoSave = useDebouncedCallback(() => {
-    const html = markdownHtml(article.title + "\n" + article.doc);
-    setHtml(html);
-  }, 0.5);
+    saveArticle();
+  }, 5);
 
   useEffect(() => {
     debouncedAutoSave();
     return () => {
       debouncedAutoSave.cancel();
     };
-  }, [article.doc, debouncedAutoSave]);
+  }, [article.title, article.content, debouncedAutoSave]);
 
   const { editor, navigateToLine } = useMarkdownEditor({
-    doc: article.doc,
-    setDoc: (doc) => setArticle({ ...article, doc }),
+    content: article.content,
+    setContent: (content) => setArticle({ ...article, content: content }),
     savePreview,
   });
 
   return (
     <div className="flex flex-col h-screen">
-      <Header canSave={canSave} doc={article.doc} />
+      <Header
+        title={article.title}
+        content={article.content}
+        isSaving={isSaving}
+        onSave={saveArticle}
+      />
       <div className="flex h-full flex-1">
-        <LeftSidebar doc={article.doc} onJump={(line) => navigateToLine(line)} />
+        <LeftSidebar content={article.content} onJump={(line) => navigateToLine(line)} />
         {/* メインコンテンツエリア */}
         <div className="h-full w-full">
           {isEdit ? (
@@ -62,7 +81,7 @@ export default function PressReleaseEditPage() {
               <div ref={editor} className="mt-10" />
             </div>
           ) : (
-            <Preview html={html} />
+            <Preview html={markdownHtml(article.title + "\n" + article.content)} />
           )}
         </div>
         <RightSidebar isEdit={isEdit} onToggle={setIsEdit} />
