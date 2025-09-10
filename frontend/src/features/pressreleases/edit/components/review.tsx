@@ -21,7 +21,7 @@ import { internalComments } from "@/features/pressreleases/edit/config/review";
 import { useSpellCheckContext } from "../context/spellCheckContext";
 
 const Review = () => {
-  const { state } = useSpellCheckContext();
+  const { state, navigateToLine } = useSpellCheckContext();
   const latestSpellCheckResult = state.latestResult;
   const originalText = state.originalText;
 
@@ -150,7 +150,9 @@ const Review = () => {
                                   return (
                                     <div
                                       key={idx}
-                                      className="rounded-md border border-red-200 bg-red-50 p-3"
+                                      className="rounded-md border border-red-200 bg-red-50 p-3 cursor-pointer hover:bg-red-100 transition-colors"
+                                      onClick={() => navigateToLine?.(lineNumber)}
+                                      title="クリックして該当行に移動"
                                     >
                                       <div className="flex items-center gap-2 text-sm text-red-700">
                                         <span className="font-medium">{item.message}</span>
@@ -192,7 +194,9 @@ const Review = () => {
                                   return (
                                     <div
                                       key={idx}
-                                      className="rounded-md border border-orange-200 bg-orange-50 p-3"
+                                      className="rounded-md border border-orange-200 bg-orange-50 p-3 cursor-pointer hover:bg-orange-100 transition-colors"
+                                      onClick={() => navigateToLine?.(lineNumber)}
+                                      title="クリックして該当行に移動"
                                     >
                                       <div className="flex items-center gap-2 text-sm text-orange-700">
                                         <span className="font-medium">{item.message}</span>

@@ -59,13 +59,22 @@ const spellCheckReducer = (state: SpellCheckState, action: SpellCheckAction): Sp
 const SpellCheckContext = createContext<{
   state: SpellCheckState;
   dispatch: React.Dispatch<SpellCheckAction>;
+  navigateToLine?: (lineNumber: number) => void;
 } | null>(null);
 
-export const SpellCheckProvider = ({ children }: { children: ReactNode }) => {
+export const SpellCheckProvider = ({
+  children,
+  navigateToLine,
+}: {
+  children: ReactNode;
+  navigateToLine?: (lineNumber: number) => void;
+}) => {
   const [state, dispatch] = useReducer(spellCheckReducer, initialState);
 
   return (
-    <SpellCheckContext.Provider value={{ state, dispatch }}>{children}</SpellCheckContext.Provider>
+    <SpellCheckContext.Provider value={{ state, dispatch, navigateToLine }}>
+      {children}
+    </SpellCheckContext.Provider>
   );
 };
 

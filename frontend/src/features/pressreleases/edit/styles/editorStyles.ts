@@ -1,7 +1,6 @@
-import { HighlightStyle, syntaxHighlighting } from "@codemirror/language";
+import { HighlightStyle } from "@codemirror/language";
 import { EditorView } from "@codemirror/view";
 import { tags } from "@lezer/highlight";
-import { EditorState } from "@codemirror/state";
 
 // Markdown記法のハイライト設定
 export const highlightStyle = HighlightStyle.define([

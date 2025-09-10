@@ -8,8 +8,9 @@ import { Preview } from "@/features/pressreleases/edit/components/preview";
 import Header from "@/features/pressreleases/edit/components/header";
 import LeftSidebar from "@/features/pressreleases/edit/components/leftSidebar";
 import RightSidebar from "@/features/pressreleases/edit/components/rightSidebar";
+import { SpellCheckProvider } from "@/features/pressreleases/edit/context/spellCheckContext";
 
-export default function PressReleaseEditClient() {
+function PressReleaseEditContent() {
   const [html, setHtml] = useState<string>("");
   const [isEdit, setIsEdit] = useState<boolean>(true);
   const [canSave, setCanSave] = useState<boolean>(false);
@@ -78,8 +79,21 @@ export default function PressReleaseEditClient() {
             </div>
           )}
         </div>
-        <RightSidebar doc={article.doc} isEdit={isEdit} onToggle={setIsEdit} />
+        <RightSidebar
+          doc={article.doc}
+          isEdit={isEdit}
+          onToggle={setIsEdit}
+          navigateToLine={navigateToLine}
+        />
       </div>
     </div>
+  );
+}
+
+export default function PressReleaseEditClient() {
+  return (
+    <SpellCheckProvider>
+      <PressReleaseEditContent />
+    </SpellCheckProvider>
   );
 }
