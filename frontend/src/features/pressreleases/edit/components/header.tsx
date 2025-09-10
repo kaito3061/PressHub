@@ -34,7 +34,7 @@ const Header = ({
   const handlePublicationCheck = async () => {
     setIsChecking(true);
     try {
-      const response = await fetch("/api/v1/openai/publication-check", {
+      const response = await fetch("/api/v1/openAi/publication-check", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
