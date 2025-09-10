@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo, useCallback } from "react";
-import { EditorState, StateEffect } from "@codemirror/state";
+import { EditorState, StateEffect, EditorSelection } from "@codemirror/state";
 import { HighlightStyle, syntaxHighlighting } from "@codemirror/language";
 import { EditorView, ViewUpdate, keymap, placeholder } from "@codemirror/view";
 import { history } from "@codemirror/commands";
@@ -43,10 +43,6 @@ export const useMarkdownEditor = ({ doc, setDoc, savePreview }: EditorSetup) => 
 
   // Markdown記法のハイライト設定
   const highlightStyle = HighlightStyle.define([
-    { tag: tags.heading1, color: "black", fontSize: "1.4em", fontWeight: "700" },
-    { tag: tags.heading2, color: "black", fontSize: "1.3em", fontWeight: "700" },
-    { tag: tags.heading3, color: "black", fontSize: "1.2em", fontWeight: "700" },
-    { tag: tags.heading4, color: "black", fontSize: "1.1em", fontWeight: "700" },
     { tag: tags.strong, color: "black", fontWeight: "700" }, // 太字
     { tag: tags.quote, color: "#6a737d" }, // 引用
     { tag: tags.emphasis, fontStyle: "italic" }, // 斜体
@@ -57,7 +53,7 @@ export const useMarkdownEditor = ({ doc, setDoc, savePreview }: EditorSetup) => 
   const editorStyle = useMemo(() => {
     return EditorView.theme({
       "&": {
-        minHeight: "500px",
+        minHeight: "560px",
         height: "100%",
       },
       // editorの外枠
@@ -69,9 +65,9 @@ export const useMarkdownEditor = ({ doc, setDoc, savePreview }: EditorSetup) => 
       "&.cm-editor .cm-scroller": {
         fontFamily: `'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace, 'Segoe UI Emoji'`,
         "-webkit-font-smoothing": "antialiased",
-        letterSpacing: "0.02em",
-        fontSize: "15px",
-        lineHeight: "1.8",
+        letterSpacing: "0.03em",
+        fontSize: "16px",
+        lineHeight: "1.7",
         color: "#000000",
         minHeight: "100%",
       },
@@ -92,6 +88,7 @@ export const useMarkdownEditor = ({ doc, setDoc, savePreview }: EditorSetup) => 
       history(),
       updateListener,
       customKeymap,
+      EditorView.scrollMargins.of(() => ({ top: 64, bottom: 16 })),
       EditorView.lineWrapping,
       EditorState.tabSize.of(4),
       editorStyle,
@@ -133,7 +130,23 @@ export const useMarkdownEditor = ({ doc, setDoc, savePreview }: EditorSetup) => 
     }
   }, [editorView, extensions]);
 
+  const navigateToLine = useCallback(
+    (lineNumber: number) => {
+      if (!editorView) return;
+      const max = editorView.state.doc.lines;
+      const safeLine = Math.max(1, Math.min(lineNumber, max));
+      const line = editorView.state.doc.line(safeLine);
+      editorView.dispatch({
+        selection: EditorSelection.cursor(line.from),
+        effects: EditorView.scrollIntoView(line.from, { y: "start" }),
+      });
+      editorView.focus();
+    },
+    [editorView]
+  );
+
   return {
     editor,
+    navigateToLine,
   };
 };
