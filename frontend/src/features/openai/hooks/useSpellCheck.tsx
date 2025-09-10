@@ -1,17 +1,19 @@
 import { SpellCheckResultType } from "../types/spellCheckResult";
 
-export const spellCheck = async (text: string) => {
-  if (!text || text.trim().length === 0) {
+export const spellCheck = async (title: string, content: string) => {
+  const fullText = `${title}\n\n${content}`;
+
+  if (!fullText || fullText.trim().length === 0) {
     throw new Error("校正するテキストがありません。");
   }
 
   try {
-    const response = await fetch("/api/v1/openai/spell-check", {
+    const response = await fetch("/api/v1/openAi/spell-check", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ text }),
+      body: JSON.stringify({ text: fullText }),
     });
 
     if (!response.ok) {

@@ -85,6 +85,7 @@ function PressReleaseEditContent() {
           )}
         </div>
         <RightSidebar
+          title={article.title}
           content={article.content}
           isEdit={isEdit}
           onToggle={setIsEdit}

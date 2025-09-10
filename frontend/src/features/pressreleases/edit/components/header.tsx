@@ -14,7 +14,7 @@ import {
   DialogTrigger,
 } from "@/features/shadcn/components/ui/dialog";
 import { Badge } from "@/features/shadcn/components/ui/badge";
-import { PublicationCheckResult } from "@/features/openai/types/publicationCheckResult";
+import { PublicationCheckResult } from "@/app/api/v1/openAi/publication-check/route";
 import { useState } from "react";
 
 const Header = ({
